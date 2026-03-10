@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevRift — Build Roblox Games with AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F9FC;
+    --surface: #FFFFFF;
+    --surface2: #F0F2F8;
+    --border: #E2E6F0;
+    --blue: #2563EB;
+    --blue-light: #EFF6FF;
+    --blue-mid: #BFDBFE;
+    --gray: #6B7280;
+    --dark: #0F172A;
+    --text: #1E293B;
+    --accent: #0EA5E9;
+    --nav-bg: rgba(248,249,252,0.85);
+    --code-bg: #0F172A;
+    --stat-bg: #FFFFFF;
+    --footer-bg: #0F172A;
+    --footer-text: rgba(255,255,255,0.3);
+  }
+
+  [data-theme="dark"] {
+    --bg: #080C14;
+    --surface: #0D1321;
+    --surface2: #111827;
+    --border: #1E2A3D;
+    --blue: #3B82F6;
+    --blue-light: rgba(59,130,246,0.1);
+    --blue-mid: rgba(59,130,246,0.25);
+    --gray: #6B7280;
+    --dark: #F9FAFB;
+    --text: #E2E8F0;
+    --accent: #06B6D4;
+    --nav-bg: rgba(8,12,20,0.85);
+    --code-bg: #0D1321;
+    --stat-bg: #0D1321;
+    --footer-bg: #0D1321;
+    --footer-text: rgba(255,255,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--blue); }
+
+  nav ul {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--dark); }
+
+  .nav-cta {
+    background: var(--blue);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: #1D4ED8 !important;
+    transform: translateY(-1px);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-light);
+    border: 1px solid var(--blue-mid);
+    color: var(--blue);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    text-align: center;
+    color: var(--dark);
+    max-width: 820px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  h1 .highlight {
+    color: var(--blue);
+    position: relative;
+  }
+
+  h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blue), var(--accent));
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--gray);
+    text-align: center;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-top: 24px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+  }
+
+  .btn-primary:hover {
+    background: #1D4ED8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37,99,235,0.4);
+  }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--dark);
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-2px);
+  }
+
+  /* CODE PREVIEW */
+  .code-preview {
+    margin-top: 64px;
+    width: 100%;
+    max-width: 820px;
+    background: #0F172A;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(15,23,42,0.18);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.65s forwards;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .code-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #FF5F57; }
+  .dot-yellow { background: #FEBC2E; }
+  .dot-green { background: #28C840; }
+
+  .code-filename {
+    margin-left: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .code-body {
+    padding: 28px 32px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.9;
+    overflow-x: auto;
+  }
+
+  .code-comment { color: #6B7A99; }
+  .code-keyword { color: #82AAFF; }
+  .code-string { color: #C3E88D; }
+  .code-func { color: #FFCB6B; }
+  .code-var { color: #F78C6C; }
+  .code-num { color: #F07178; }
+
+  /* STATS */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 60px;
+    background: var(--stat-bg);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -1px;
+  }
+
+  .stat-num span { color: var(--blue); }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--gray);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* FEATURES */
+  .features {
+    padding: 100px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    text-align: center;
+    color: var(--dark);
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--gray);
+    font-size: 17px;
+    max-width: 500px;
+    margin: 0 auto 64px;
+    line-height: 1.7;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--accent));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--blue-mid);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(37,99,235,0.1);
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--blue-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .feature-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .feature-desc {
+    color: var(--gray);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    background: var(--dark);
+    padding: 100px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .how::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(37,99,235,0.15) 0%, transparent 70%);
+  }
+
+  .how .section-title { color: white; }
+  .how .section-label { color: var(--accent); }
+  .how .section-sub { color: rgba(255,255,255,0.5); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(37,99,235,0.5), rgba(14,165,233,0.5), transparent);
+  }
+
+  .step { text-align: center; }
+
+  .step-num {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--blue), var(--accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* PRICING */
+  .pricing {
+    padding: 100px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 0;
+  }
+
+  .pricing-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(15,23,42,0.1);
+  }
+
+  .pricing-card.featured {
+    background: var(--dark);
+    border-color: var(--blue);
+    box-shadow: 0 8px 40px rgba(37,99,235,0.2);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--blue), var(--accent));
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .featured .plan-name { color: rgba(255,255,255,0.5); }
+
+  .plan-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .featured .plan-price { color: white; }
+
+  .plan-price sup {
+    font-size: 24px;
+    font-weight: 600;
+    vertical-align: super;
+    letter-spacing: 0;
+  }
+
+  .plan-period {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 32px;
+  }
+
+  .featured .plan-period { color: rgba(255,255,255,0.4); }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .featured .plan-features li { color: rgba(255,255,255,0.8); }
+
+  .plan-features li::before {
+    content: '✓';
+    width: 20px;
+    height: 20px;
+    background: var(--blue-light);
+    color: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .featured .plan-features li::before {
+    background: rgba(37,99,235,0.2);
+    color: var(--accent);
+  }
+
+  .plan-btn {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1.5px solid var(--border);
+    color: var(--dark);
+  }
+
+  .plan-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .plan-btn.featured-btn {
+    background: linear-gradient(135deg, var(--blue), var(--accent));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+  }
+
+  .plan-btn.featured-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37,99,235,0.5);
+    color: white;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: linear-gradient(135deg, var(--blue) 0%, #0284C7 100%);
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .cta-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .cta-section p {
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .cta-section .btn-white {
+    background: white;
+    color: var(--blue);
+    padding: 16px 40px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  .cta-section .btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--footer-bg);
+    padding: 40px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer .logo { color: white; }
+  footer p { color: var(--footer-text); font-size: 14px; }
+
+  /* DARK MODE TOGGLE */
+  .theme-toggle {
+    width: 44px;
+    height: 24px;
+    background: var(--border);
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="dark"] .theme-toggle {
+    background: var(--blue);
+  }
+
+  [data-theme="dark"] .theme-toggle::after {
+    transform: translateX(20px);
+    background: white;
+  }
+
+  .theme-toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  .theme-icon { font-size: 15px; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Dev<span>Rift</span></div>
+  <ul>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div class="theme-toggle-wrap">
+      <span class="theme-icon">☀️</span>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      <span class="theme-icon">🌙</span>
+    </div>
+    <a href="devrift-auth.html" style="font-size:15px; font-weight:600; color:var(--text); text-decoration:none; padding:10px 18px; border:1.5px solid var(--border); border-radius:8px; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">Sign in</a>
+    <a href="devrift-auth.html" class="nav-cta">Get started free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-badge">🎮 AI-powered Roblox game builder</div>
+
+  <h1>Generate your <span class="highlight">Roblox game</span> with AI in minutes</h1>
+
+  <p class="hero-sub">Analyze trending games, generate complete Lua code, and launch your next hit game — no coding experience required.</p>
+
+  <div class="hero-actions">
+    <a href="#" class="btn-primary">Start building for free →</a>
+    <a href="#how" class="btn-secondary">See how it works</a>
+  </div>
+
+  <div class="code-preview">
+    <div class="code-bar">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="code-filename">SpaceTycoon_Generated.lua</span>
+    </div>
+    <div class="code-body">
+      <div><span class="code-comment">-- 🚀 Space Tycoon — Generated by DevRift AI</span></div>
+      <div><span class="code-comment">-- Trend Score: 94/100 · Est. revenue: $2,400/mo</span></div>
+      <br>
+      <div><span class="code-keyword">local</span> <span class="code-var">Players</span> = <span class="code-func">game</span>:<span class="code-func">GetService</span>(<span class="code-string">"Players"</span>)</div>
+      <div><span class="code-keyword">local</span> <span class="code-var">ReplicatedStorage</span> = <span class="code-func">game</span>:<span class="code-func">GetService</span>(<span class="code-string">"ReplicatedStorage"</span>)</div>
+      <br>
+      <div><span class="code-keyword">local</span> <span class="code-var">GAME_CONFIG</span> = {</div>
+      <div>&nbsp;&nbsp;<span class="code-var">startingCash</span> = <span class="code-num">100</span>,</div>
+      <div>&nbsp;&nbsp;<span class="code-var">tickRate</span> = <span class="code-num">1</span>,</div>
+      <div>&nbsp;&nbsp;<span class="code-var">vipGamepassId</span> = <span class="code-num">123456789</span>,</div>
+      <div>&nbsp;&nbsp;<span class="code-var">vipMultiplier</span> = <span class="code-num">2.5</span></div>
+      <div>}</div>
+      <br>
+      <div><span class="code-keyword">local function</span> <span class="code-func">setupPlayer</span>(<span class="code-var">player</span>)</div>
+      <div>&nbsp;&nbsp;<span class="code-keyword">local</span> <span class="code-var">leaderstats</span> = <span class="code-func">Instance</span>.<span class="code-func">new</span>(<span class="code-string">"Folder"</span>)</div>
+      <div>&nbsp;&nbsp;<span class="code-var">leaderstats</span>.<span class="code-var">Name</span> = <span class="code-string">"leaderstats"</span></div>
+      <div>&nbsp;&nbsp;<span class="code-var">leaderstats</span>.<span class="code-var">Parent</span> = <span class="code-var">player</span></div>
+      <div><span class="code-keyword">end</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats fade-in">
+  <div class="stat">
+    <div class="stat-num">3.5<span>M+</span></div>
+    <div class="stat-label">Roblox developers worldwide</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num"><span>$</span>722M</div>
+    <div class="stat-label">Paid out to creators</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5<span>min</span></div>
+    <div class="stat-label">Average game generation time</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">94<span>%</span></div>
+    <div class="stat-label">Trend prediction accuracy</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything you need to build & launch</h2>
+  <p class="section-sub">From trend analysis to ready-to-deploy Lua code — DevRift handles the hard part.</p>
+
+  <div class="features-grid">
+    <div class="feature-card fade-in">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Real-time Trend Analysis</div>
+      <div class="feature-desc">Track which game genres are rising or saturating. Get daily insights on what players want right now.</div>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Instant Lua Code Generation</div>
+      <div class="feature-desc">Describe your game idea — get complete, working Lua code ready to paste into Roblox Studio in minutes.</div>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Monetization Blueprint</div>
+      <div class="feature-desc">AI-generated game pass strategies, item pricing, and revenue projections based on similar successful games.</div>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">Trend Score System</div>
+      <div class="feature-desc">Every game concept gets a 0-100 trend score based on current platform data — build with confidence, not guesswork.</div>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-title">Competitor Analysis</div>
+      <div class="feature-desc">See what top-performing games in your niche are doing right — and build something better.</div>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🚀</div>
+      <div class="feature-title">Launch Checklist</div>
+      <div class="feature-desc">Step-by-step launch guide tailored to your game type — from thumbnails to first 1,000 players strategy.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">From idea to playable game in 4 steps</h2>
+  <p class="section-sub">No coding experience needed. Just describe what you want to build.</p>
+
+  <div class="steps">
+    <div class="step fade-in">
+      <div class="step-num">1</div>
+      <div class="step-title">Pick your genre</div>
+      <div class="step-desc">Choose from Tycoon, Simulator, Obby, Horror and more — or let AI suggest based on current trends.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">2</div>
+      <div class="step-title">Describe your game</div>
+      <div class="step-desc">Tell DevRift your theme, mechanics, and target audience — or let the AI choose everything automatically based on what's trending right now.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">3</div>
+      <div class="step-title">Get your Lua code</div>
+      <div class="step-desc">Receive complete, working Lua scripts with monetization built in — ready for Roblox Studio.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">4</div>
+      <div class="step-title">Launch & earn</div>
+      <div class="step-desc">Follow your personalized launch plan and start earning Robux and real $ from day one.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">Simple, transparent pricing</h2>
+  <p class="section-sub">Start free, upgrade when you're ready to scale.</p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card fade-in">
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><sup>$</sup>0</div>
+      <div class="plan-period">forever</div>
+      <ul class="plan-features">
+        <li>1 game generation/month</li>
+        <li>Basic trend dashboard</li>
+        <li>Starter Lua templates</li>
+        <li>Community support</li>
+      </ul>
+      <a href="#" class="plan-btn">Get started free</a>
+    </div>
+
+    <div class="pricing-card featured fade-in">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price"><sup>$</sup>29</div>
+      <div class="plan-period">/month · cancel anytime</div>
+      <ul class="plan-features">
+        <li>10 game generations/month</li>
+        <li>Full trend analytics</li>
+        <li>Complete Lua code output</li>
+        <li>Monetization blueprint</li>
+        <li>Competitor analysis</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#" class="plan-btn featured-btn">Start Pro →</a>
+    </div>
+
+    <div class="pricing-card fade-in">
+      <div class="plan-name">Studio</div>
+      <div class="plan-price"><sup>$</sup>79</div>
+      <div class="plan-period">/month · cancel anytime</div>
+      <ul class="plan-features">
+        <li>Unlimited generations</li>
+        <li>Advanced trend API access</li>
+        <li>Multi-game management</li>
+        <li>Revenue forecasting</li>
+        <li>Fortnite UEFN (coming soon)</li>
+        <li>Dedicated support</li>
+      </ul>
+      <a href="#" class="plan-btn">Go Studio</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding:80px 24px;background:var(--surface2);">
+  <div style="max-width:1000px;margin:0 auto;text-align:center;">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title" style="margin-bottom:48px;">Developers love DevRift</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:left;">
+        <div style="margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;">"I generated my first Tycoon game in 20 minutes. The Lua code worked straight away in Roblox Studio. Already at 50k visits in 2 weeks."</p>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://api.dicebear.com/7.x/shapes/svg?seed=anyl&backgroundColor=3B82F6" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark);">anyl</div><div style="font-size:12px;color:var(--gray);">Roblox Developer · Pro Plan</div></div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--blue);border-radius:16px;padding:24px;text-align:left;box-shadow:0 4px 20px rgba(37,99,235,0.1);">
+        <div style="margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;">"DevRift understood exactly what makes horror games pop on Roblox right now. Generated a full script with jump scares, atmosphere and game passes in one shot."</p>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://api.dicebear.com/7.x/shapes/svg?seed=eciriix&backgroundColor=0F172A" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark);">eciriix</div><div style="font-size:12px;color:var(--gray);">Horror Game Developer · Pro Plan</div></div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:left;">
+        <div style="margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;">"The trend dashboard alone is worth the $29. I stopped wasting time on saturated genres and my last game hit the front page in 3 days."</p>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://api.dicebear.com/7.x/shapes/svg?seed=Seishin&backgroundColor=8B5CF6" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark);">Seishin</div><div style="font-size:12px;color:var(--gray);">Studio Owner · Pro Plan</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to build your first hit game?</h2>
+  <p>Join thousands of Roblox developers using AI to build smarter and faster.</p>
+  <a href="#" class="btn-white">Start building for free →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Dev<span>Rift</span></div>
+  <p>© 2026 DevRift. All rights reserved.</p>
+  <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.25);margin-bottom:14px;">Dev by agx</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;">
+      <a href="https://twitter.com/mczfvlr" target="_blank" style="display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,0.5);text-decoration:none;font-size:13px;font-weight:600;padding:8px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;transition:all 0.2s;" onmouseover="this.style.color='white';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='rgba(255,255,255,0.5)';this.style.borderColor='rgba(255,255,255,0.1)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @mczfvlr
+      </a>
+      <div style="display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,0.5);font-size:13px;font-weight:600;padding:8px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.081.114 18.1.12 18.12a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        agx.uhq
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Dark mode toggle
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+
+  // Check saved preference
+  const saved = localStorage.getItem('devrift-theme');
+  if (saved) html.setAttribute('data-theme', saved);
+
+  toggle.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('devrift-theme', next);
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
