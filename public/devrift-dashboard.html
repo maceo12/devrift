@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevRift — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4F6FB;
+    --surface: #FFFFFF;
+    --border: #E2E6F0;
+    --border2: #D0D7E8;
+    --blue: #2563EB;
+    --blue-light: #EFF6FF;
+    --blue-mid: #BFDBFE;
+    --cyan: #0EA5E9;
+    --gray: #6B7280;
+    --dark: #0F172A;
+    --text: #1E293B;
+    --dim: #94A3B8;
+    --green: #22C55E;
+    --orange: #F97316;
+    --red: #EF4444;
+    --yellow: #EAB308;
+    --sidebar-bg: #0F172A;
+    --sidebar-text: rgba(255,255,255,0.6);
+    --sidebar-active: rgba(255,255,255,0.1);
+  }
+
+  [data-theme="dark"] {
+    --bg: #080C14;
+    --surface: #0D1321;
+    --border: #1E2A3D;
+    --border2: #243045;
+    --blue: #3B82F6;
+    --blue-light: rgba(59,130,246,0.1);
+    --blue-mid: rgba(59,130,246,0.25);
+    --cyan: #06B6D4;
+    --gray: #6B7280;
+    --dark: #F9FAFB;
+    --text: #E2E8F0;
+    --dim: #4B5563;
+    --sidebar-bg: #060A11;
+    --sidebar-text: rgba(255,255,255,0.5);
+    --sidebar-active: rgba(59,130,246,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 50;
+    transition: background 0.3s;
+  }
+
+  .sidebar-logo {
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: white;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .sidebar-logo span {
+    background: linear-gradient(90deg, #3B82F6, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .sidebar-section {
+    padding: 20px 16px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    margin: 2px 8px;
+    border-radius: 8px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .sidebar-item:hover {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.9);
+  }
+
+  .sidebar-item.active {
+    background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(6,182,212,0.1));
+    color: white;
+    border: 1px solid rgba(59,130,246,0.2);
+  }
+
+  .sidebar-item .icon { font-size: 16px; width: 20px; text-align: center; }
+
+  .sidebar-badge {
+    margin-left: auto;
+    background: var(--blue);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 100px;
+  }
+
+  .sidebar-bottom {
+    margin-top: auto;
+    padding: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .user-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .user-card:hover { background: rgba(255,255,255,0.07); }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #3B82F6, #06B6D4);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-plan {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* MAIN */
+  .main {
+    margin-left: 240px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .topbar-left h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+  }
+
+  .topbar-left p {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 1px;
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .theme-toggle {
+    width: 40px;
+    height: 22px;
+    background: var(--border);
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .theme-toggle::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="dark"] .theme-toggle { background: var(--blue); }
+  [data-theme="dark"] .theme-toggle::after { transform: translateX(18px); }
+
+  .topbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.3);
+  }
+
+  .topbar-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+  }
+
+  /* CONTENT */
+  .content {
+    padding: 28px 32px;
+    flex: 1;
+  }
+
+  /* STATS GRID */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    transition: all 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .stat-card:nth-child(1) { animation-delay: 0.05s; }
+  .stat-card:nth-child(2) { animation-delay: 0.1s; }
+  .stat-card:nth-child(3) { animation-delay: 0.15s; }
+  .stat-card:nth-child(4) { animation-delay: 0.2s; }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-color: var(--blue-mid);
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .stat-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .stat-change {
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .stat-change.up { color: var(--green); }
+  .stat-change.down { color: var(--red); }
+
+  /* MAIN GRID */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* TREND TABLE */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.25s forwards;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .card-sub {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .card-action {
+    font-size: 13px;
+    color: var(--blue);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .card-action:hover { opacity: 0.7; }
+
+  /* TREND ROWS */
+  .trend-table { width: 100%; }
+
+  .trend-row {
+    display: grid;
+    grid-template-columns: 32px 1fr 80px 80px 100px 90px;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .trend-row:last-child { border-bottom: none; }
+  .trend-row:hover { background: var(--blue-light); }
+
+  .trend-row.header {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    cursor: default;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .trend-row.header:hover { background: transparent; }
+
+  .rank {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dim);
+  }
+
+  .genre-info { display: flex; flex-direction: column; gap: 2px; }
+
+  .genre-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .genre-tag {
+    font-size: 11px;
+    color: var(--gray);
+  }
+
+  .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+
+  .score-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .score-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .score-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    width: 28px;
+    text-align: right;
+  }
+
+  .trend-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .trend-badge.hot { background: rgba(239,68,68,0.1); color: #DC2626; }
+  .trend-badge.rising { background: rgba(34,197,94,0.1); color: #16A34A; }
+  .trend-badge.stable { background: rgba(59,130,246,0.1); color: #2563EB; }
+  .trend-badge.falling { background: rgba(107,114,128,0.1); color: #4B5563; }
+
+  [data-theme="dark"] .trend-badge.hot { background: rgba(239,68,68,0.15); color: #F87171; }
+  [data-theme="dark"] .trend-badge.rising { background: rgba(34,197,94,0.15); color: #4ADE80; }
+  .trend-badge.saturated { background: rgba(249,115,22,0.1); color: #EA580C; }
+
+  .revenue-est {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .gen-btn {
+    padding: 6px 14px;
+    background: var(--blue-light);
+    color: var(--blue);
+    border: 1px solid var(--blue-mid);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .gen-btn:hover {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+  }
+
+  /* RIGHT PANEL */
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* QUICK GENERATE */
+  .generate-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.3s forwards;
+  }
+
+  .generate-card .card-title { margin-bottom: 16px; }
+
+  .gen-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 10px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+
+  .gen-select:focus { border-color: var(--blue); }
+
+  .ai-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: var(--blue-light);
+    border: 1px solid var(--blue-mid);
+    border-radius: 8px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .ai-toggle:hover { border-color: var(--blue); }
+
+  .toggle-switch {
+    width: 36px;
+    height: 20px;
+    background: var(--blue);
+    border-radius: 100px;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.2s;
+  }
+
+  .toggle-switch.off { background: var(--border); }
+  .toggle-switch.off::after { transform: none; }
+  .toggle-switch.on::after { transform: translateX(16px); }
+
+  .ai-toggle-text { font-size: 13px; font-weight: 600; color: var(--blue); }
+  .ai-toggle-sub { font-size: 11px; color: var(--gray); }
+
+  .generate-big-btn {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .generate-big-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(37,99,235,0.4);
+  }
+
+  .generate-big-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s;
+  }
+
+  .generate-big-btn:hover::before { left: 100%; }
+
+  /* RECENT GENERATIONS */
+  .recent-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.35s forwards;
+  }
+
+  .recent-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .recent-item:last-child { border-bottom: none; }
+  .recent-item:hover { background: var(--blue-light); }
+
+  .recent-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .recent-info { flex: 1; min-width: 0; }
+
+  .recent-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .recent-meta {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .recent-score {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--blue);
+  }
+
+  /* BOTTOM GRID */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* GENRE CHART */
+  .chart-bars {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .chart-row { display: flex; align-items: center; gap: 12px; }
+
+  .chart-label {
+    font-size: 13px;
+    color: var(--dark);
+    font-weight: 500;
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .chart-bar-wrap {
+    flex: 1;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .chart-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .chart-pct {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray);
+    width: 36px;
+    text-align: right;
+  }
+
+  /* ALERTS */
+  .alerts-list { padding: 12px 20px; display: flex; flex-direction: column; gap: 10px; }
+
+  .alert-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .alert-item:hover {
+    border-color: var(--blue-mid);
+    background: var(--blue-light);
+  }
+
+  .alert-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .alert-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .alert-text strong { color: var(--dark); font-weight: 600; }
+  .alert-time { font-size: 11px; color: var(--dim); margin-top: 3px; }
+
+  /* GENERATION MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 560px;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s;
+    position: relative;
+  }
+
+  .modal-overlay.show .modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  .modal-sub {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 24px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--gray);
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { background: var(--border); color: var(--dark); }
+
+  .modal-field { margin-bottom: 16px; }
+
+  .modal-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 7px;
+    display: block;
+  }
+
+  .modal-input, .modal-textarea, .modal-select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .modal-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+  .modal-select { appearance: none; cursor: pointer; }
+  .modal-input:focus, .modal-textarea:focus, .modal-select:focus { border-color: var(--blue); }
+
+  .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .ai-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: var(--blue-light);
+    border: 1.5px solid var(--blue-mid);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .ai-mode-text { font-size: 13px; font-weight: 600; color: var(--blue); }
+  .ai-mode-sub { font-size: 12px; color: var(--gray); }
+
+  .modal-generate-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal-generate-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(37,99,235,0.45);
+  }
+
+  .generating-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 0 8px;
+    text-align: center;
+  }
+
+  .generating-state.show { display: flex; }
+
+  .gen-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--border);
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .gen-steps { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 16px; }
+
+  .gen-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray);
+    opacity: 0.4;
+    transition: all 0.4s;
+  }
+
+  .gen-step.active { opacity: 1; color: var(--blue); font-weight: 600; }
+  .gen-step.done { opacity: 1; color: var(--green); }
+
+  .gen-step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <a href="devrift-final.html" class="sidebar-logo">Dev<span>Rift</span></a>
+
+  <div class="sidebar-section">Main</div>
+  <a class="sidebar-item active" onclick="setActive(this)">
+    <span class="icon">📊</span> Dashboard
+  </a>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">🔥</span> Trending Games
+    <span class="sidebar-badge">Live</span>
+  </a>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">⚡</span> Generate Game
+  </a>
+
+  <div class="sidebar-section">My Games</div>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">🎮</span> My Projects
+    <span class="sidebar-badge">3</span>
+  </a>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">📁</span> Saved Code
+  </a>
+
+  <div class="sidebar-section">Analytics</div>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">💰</span> Revenue Tracker
+  </a>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">🔍</span> Competitor Analysis
+  </a>
+
+  <div class="sidebar-section">Account</div>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">⚙️</span> Settings
+  </a>
+  <a class="sidebar-item" onclick="setActive(this)">
+    <span class="icon">💳</span> Upgrade Plan
+  </a>
+
+  <div class="sidebar-bottom">
+    <div class="user-card">
+      <div class="user-avatar">JR</div>
+      <div>
+        <div class="user-name">Jake_RoBuilder</div>
+        <div class="user-plan">Pro Plan · 7 gen left</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>Dashboard</h1>
+      <p>Tuesday, March 10, 2026 · Roblox trends updated 2 hours ago</p>
+    </div>
+    <div class="topbar-right">
+      <button class="theme-toggle" id="themeToggle"></button>
+      <button class="topbar-btn" onclick="openModal()">
+        ⚡ Generate New Game
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">
+          Games Generated
+          <div class="stat-icon" style="background:rgba(37,99,235,0.1);">🎮</div>
+        </div>
+        <div class="stat-value">3</div>
+        <div class="stat-change up">↑ +2 this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">
+          Est. Monthly Revenue
+          <div class="stat-icon" style="background:rgba(34,197,94,0.1);">💰</div>
+        </div>
+        <div class="stat-value">$3.2k</div>
+        <div class="stat-change up">↑ +18% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">
+          Top Trend Score
+          <div class="stat-icon" style="background:rgba(239,68,68,0.1);">🔥</div>
+        </div>
+        <div class="stat-value">94</div>
+        <div class="stat-change up">↑ Tycoon genre</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">
+          Generations Left
+          <div class="stat-icon" style="background:rgba(249,115,22,0.1);">⚡</div>
+        </div>
+        <div class="stat-value">7</div>
+        <div class="stat-change down">3 used this month</div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- TREND TABLE -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🔥 Live Trend Rankings</div>
+            <div class="card-sub">Updated every 24h from Roblox platform data</div>
+          </div>
+          <a class="card-action">View all →</a>
+        </div>
+        <div class="trend-table">
+          <div class="trend-row header">
+            <span>#</span>
+            <span>Genre</span>
+            <span>Trend Score</span>
+            <span>Status</span>
+            <span>Est. Revenue</span>
+            <span>Action</span>
+          </div>
+          <div class="trend-row" onclick="openModalWithGenre('Tycoon')">
+            <span class="rank">1</span>
+            <div class="genre-info">
+              <span class="genre-name">🏭 Tycoon</span>
+              <span class="genre-tag">Beginner friendly</span>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar"><div class="score-fill" style="width:94%;background:linear-gradient(90deg,#EF4444,#F97316)"></div></div>
+              <span class="score-num">94</span>
+            </div>
+            <span class="trend-badge hot">🔥 Hot</span>
+            <span class="revenue-est">$1.2k–$4k/mo</span>
+            <button class="gen-btn" onclick="event.stopPropagation();openModalWithGenre('Tycoon')">Generate</button>
+          </div>
+          <div class="trend-row" onclick="openModalWithGenre('Simulator')">
+            <span class="rank">2</span>
+            <div class="genre-info">
+              <span class="genre-name">🎯 Simulator</span>
+              <span class="genre-tag">High retention</span>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar"><div class="score-fill" style="width:88%;background:linear-gradient(90deg,#22C55E,#16A34A)"></div></div>
+              <span class="score-num">88</span>
+            </div>
+            <span class="trend-badge rising">↑ Rising</span>
+            <span class="revenue-est">$800–$3.5k/mo</span>
+            <button class="gen-btn" onclick="event.stopPropagation();openModalWithGenre('Simulator')">Generate</button>
+          </div>
+          <div class="trend-row" onclick="openModalWithGenre('Horror')">
+            <span class="rank">3</span>
+            <div class="genre-info">
+              <span class="genre-name">👻 Horror</span>
+              <span class="genre-tag">Viral potential</span>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar"><div class="score-fill" style="width:82%;background:linear-gradient(90deg,#8B5CF6,#6D28D9)"></div></div>
+              <span class="score-num">82</span>
+            </div>
+            <span class="trend-badge rising">↑ Rising</span>
+            <span class="revenue-est">$600–$2.8k/mo</span>
+            <button class="gen-btn" onclick="event.stopPropagation();openModalWithGenre('Horror')">Generate</button>
+          </div>
+          <div class="trend-row" onclick="openModalWithGenre('Obby')">
+            <span class="rank">4</span>
+            <div class="genre-info">
+              <span class="genre-name">🏃 Obby</span>
+              <span class="genre-tag">Easy to build</span>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar"><div class="score-fill" style="width:74%;background:linear-gradient(90deg,#3B82F6,#06B6D4)"></div></div>
+              <span class="score-num">74</span>
+            </div>
+            <span class="trend-badge stable">→ Stable</span>
+            <span class="revenue-est">$300–$1.5k/mo</span>
+            <button class="gen-btn" onclick="event.stopPropagation();openModalWithGenre('Obby')">Generate</button>
+          </div>
+          <div class="trend-row" onclick="openModalWithGenre('RPG')">
+            <span class="rank">5</span>
+            <div class="genre-info">
+              <span class="genre-name">⚔️ RPG</span>
+              <span class="genre-tag">High competition</span>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar"><div class="score-fill" style="width:61%;background:linear-gradient(90deg,#F97316,#EAB308)"></div></div>
+              <span class="score-num">61</span>
+            </div>
+            <span class="trend-badge saturated">⚠ Saturated</span>
+            <span class="revenue-est">$200–$1k/mo</span>
+            <button class="gen-btn" onclick="event.stopPropagation();openModalWithGenre('RPG')">Generate</button>
+          </div>
+          <div class="trend-row" onclick="openModalWithGenre('FPS')">
+            <span class="rank">6</span>
+            <div class="genre-info">
+              <span class="genre-name">🔫 FPS</span>
+              <span class="genre-tag">Advanced dev needed</span>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar"><div class="score-fill" style="width:48%;background:linear-gradient(90deg,#6B7280,#4B5563)"></div></div>
+              <span class="score-num">48</span>
+            </div>
+            <span class="trend-badge falling">↓ Falling</span>
+            <span class="revenue-est">$100–$800/mo</span>
+            <button class="gen-btn" onclick="event.stopPropagation();openModalWithGenre('FPS')">Generate</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="right-panel">
+
+        <!-- QUICK GENERATE -->
+        <div class="generate-card">
+          <div class="card-title" style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:16px;">⚡ Quick Generate</div>
+
+          <div class="ai-toggle" onclick="toggleAI(this)">
+            <div class="toggle-switch on" id="aiSwitch"></div>
+            <div>
+              <div class="ai-toggle-text">🤖 Let AI choose for me</div>
+              <div class="ai-toggle-sub">AI picks the best genre based on trends</div>
+            </div>
+          </div>
+
+          <select class="gen-select" id="quickGenre">
+            <option value="">Select a genre manually...</option>
+            <option value="Tycoon">🏭 Tycoon (Score: 94)</option>
+            <option value="Simulator">🎯 Simulator (Score: 88)</option>
+            <option value="Horror">👻 Horror (Score: 82)</option>
+            <option value="Obby">🏃 Obby (Score: 74)</option>
+            <option value="RPG">⚔️ RPG (Score: 61)</option>
+          </select>
+
+          <select class="gen-select">
+            <option>🎨 Any theme</option>
+            <option>🚀 Space</option>
+            <option>🏰 Medieval</option>
+            <option>🌆 City / Modern</option>
+            <option>🌊 Ocean</option>
+            <option>🔮 Fantasy</option>
+          </select>
+
+          <button class="generate-big-btn" onclick="openModal()">
+            ✨ Generate Lua Code
+          </button>
+        </div>
+
+        <!-- RECENT GENERATIONS -->
+        <div class="recent-card">
+          <div class="card-header">
+            <div class="card-title">Recent Generations</div>
+            <a class="card-action">View all</a>
+          </div>
+          <div class="recent-item">
+            <div class="recent-icon" style="background:rgba(239,68,68,0.1);">🏭</div>
+            <div class="recent-info">
+              <div class="recent-name">Space Tycoon v2</div>
+              <div class="recent-meta">Tycoon · 2 days ago</div>
+            </div>
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;background:rgba(34,197,94,0.1);color:#16A34A;white-space:nowrap;">● Published</span>
+          </div>
+          <div class="recent-item">
+            <div class="recent-icon" style="background:rgba(139,92,246,0.1);">👻</div>
+            <div class="recent-info">
+              <div class="recent-name">Haunted School</div>
+              <div class="recent-meta">Horror · 5 days ago</div>
+            </div>
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;background:rgba(249,115,22,0.1);color:#EA580C;white-space:nowrap;">● In Progress</span>
+          </div>
+          <div class="recent-item">
+            <div class="recent-icon" style="background:rgba(34,197,94,0.1);">🎯</div>
+            <div class="recent-info">
+              <div class="recent-name">Pet Simulator X2</div>
+              <div class="recent-meta">Simulator · 1 week ago</div>
+            </div>
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;background:rgba(107,114,128,0.1);color:#4B5563;white-space:nowrap;">● Draft</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BOTTOM GRID -->
+    <div class="bottom-grid">
+
+      <!-- GENRE POPULARITY -->
+      <div class="card" style="animation-delay:0.4s;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">📈 Genre Popularity</div>
+            <div class="card-sub">Based on active players this week</div>
+          </div>
+        </div>
+        <div class="chart-bars">
+          <div class="chart-row">
+            <span class="chart-label">Tycoon</span>
+            <div class="chart-bar-wrap"><div class="chart-bar-fill" style="width:94%;background:linear-gradient(90deg,#EF4444,#F97316)"></div></div>
+            <span class="chart-pct">94%</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">Simulator</span>
+            <div class="chart-bar-wrap"><div class="chart-bar-fill" style="width:88%;background:linear-gradient(90deg,#22C55E,#16A34A)"></div></div>
+            <span class="chart-pct">88%</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">Horror</span>
+            <div class="chart-bar-wrap"><div class="chart-bar-fill" style="width:82%;background:linear-gradient(90deg,#8B5CF6,#6D28D9)"></div></div>
+            <span class="chart-pct">82%</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">Obby</span>
+            <div class="chart-bar-wrap"><div class="chart-bar-fill" style="width:74%;background:linear-gradient(90deg,#3B82F6,#06B6D4)"></div></div>
+            <span class="chart-pct">74%</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">RPG</span>
+            <div class="chart-bar-wrap"><div class="chart-bar-fill" style="width:61%;background:linear-gradient(90deg,#F97316,#EAB308)"></div></div>
+            <span class="chart-pct">61%</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">FPS</span>
+            <div class="chart-bar-wrap"><div class="chart-bar-fill" style="width:48%;background:linear-gradient(90deg,#6B7280,#4B5563)"></div></div>
+            <span class="chart-pct">48%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TREND ALERTS -->
+      <div class="card" style="animation-delay:0.45s;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🔔 Trend Alerts</div>
+            <div class="card-sub">Real-time notifications on market shifts</div>
+          </div>
+          <a class="card-action">Mark all read</a>
+        </div>
+        <div class="alerts-list">
+          <div class="alert-item">
+            <div class="alert-dot" style="background:#EF4444;box-shadow:0 0 6px #EF4444"></div>
+            <div>
+              <div class="alert-text"><strong>Tycoon genre</strong> surged +12% in the last 48h — ideal time to launch</div>
+              <div class="alert-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-dot" style="background:#22C55E"></div>
+            <div>
+              <div class="alert-text"><strong>Horror games</strong> seeing +8% player growth — untapped niche opportunity</div>
+              <div class="alert-time">6 hours ago</div>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-dot" style="background:#F97316"></div>
+            <div>
+              <div class="alert-text"><strong>RPG genre</strong> is saturating — avoid launching without a unique mechanic</div>
+              <div class="alert-time">Yesterday</div>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-dot" style="background:#3B82F6"></div>
+            <div>
+              <div class="alert-text"><strong>Space theme</strong> trending across all genres — consider using it in your next game</div>
+              <div class="alert-time">2 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- GENERATION MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- FORM STATE -->
+    <div id="formState">
+      <div class="modal-title">⚡ Generate Lua Code</div>
+      <div class="modal-sub">Start from scratch or import your existing script</div>
+
+      <!-- MODAL TABS -->
+      <div style="display:flex;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:4px;margin-bottom:24px;">
+        <button id="tabGenerate" onclick="switchModalTab('generate')" style="flex:1;padding:9px;border:none;border-radius:7px;background:var(--blue);color:white;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;">
+          ✨ Generate from scratch
+        </button>
+        <button id="tabImport" onclick="switchModalTab('import')" style="flex:1;padding:9px;border:none;border-radius:7px;background:transparent;color:var(--gray);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;">
+          📂 Import my script
+        </button>
+      </div>
+
+      <!-- GENERATE TAB -->
+      <div id="panelGenerate">
+        <div class="ai-mode-toggle" onclick="toggleModalAI()">
+          <div class="toggle-switch on" id="modalAiSwitch"></div>
+          <div>
+            <div class="ai-mode-text">🤖 Full AI Mode — Let AI choose everything</div>
+            <div class="ai-mode-sub">AI picks genre, theme & mechanics based on what's trending right now</div>
+          </div>
+        </div>
+
+        <div id="manualFields">
+          <div class="modal-row">
+            <div class="modal-field">
+              <label class="modal-label">Genre</label>
+              <select class="modal-select" id="modalGenre">
+                <option value="Tycoon">🏭 Tycoon (Score: 94)</option>
+                <option value="Simulator">🎯 Simulator (Score: 88)</option>
+                <option value="Horror">👻 Horror (Score: 82)</option>
+                <option value="Obby">🏃 Obby (Score: 74)</option>
+                <option value="RPG">⚔️ RPG (Score: 61)</option>
+                <option value="FPS">🔫 FPS (Score: 48)</option>
+              </select>
+            </div>
+            <div class="modal-field">
+              <label class="modal-label">Theme</label>
+              <select class="modal-select">
+                <option>🚀 Space</option>
+                <option>🏰 Medieval</option>
+                <option>🌆 City / Modern</option>
+                <option>🌊 Ocean</option>
+                <option>🔮 Fantasy</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-field">
+            <label class="modal-label">Game description (optional)</label>
+            <textarea class="modal-textarea" placeholder="e.g. A space tycoon where players build rocket factories and earn Robux by launching satellites..."></textarea>
+          </div>
+
+          <div class="modal-row">
+            <div class="modal-field">
+              <label class="modal-label">Your level</label>
+              <select class="modal-select">
+                <option>🟢 Beginner</option>
+                <option>🟡 Intermediate</option>
+                <option>🔴 Advanced</option>
+              </select>
+            </div>
+            <div class="modal-field">
+              <label class="modal-label">Monetization</label>
+              <select class="modal-select">
+                <option>Game Passes + Items</option>
+                <option>Game Passes only</option>
+                <option>Items / Shop only</option>
+                <option>Premium only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button class="modal-generate-btn" onclick="startGeneration()">
+          ✨ Generate Complete Lua Code →
+        </button>
+      </div>
+
+      <!-- IMPORT TAB -->
+      <div id="panelImport" style="display:none;">
+        <div style="background:var(--blue-light);border:1.5px dashed var(--blue-mid);border-radius:12px;padding:24px;text-align:center;margin-bottom:16px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--blue-mid)'">
+          <div style="font-size:28px;margin-bottom:8px;">📂</div>
+          <div style="font-size:14px;font-weight:600;color:var(--blue);margin-bottom:4px;">Drop your .lua file here</div>
+          <div style="font-size:12px;color:var(--gray);">or click to browse — .lua files only</div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="flex:1;height:1px;background:var(--border);"></div>
+          <span style="font-size:12px;color:var(--gray);font-weight:500;">or paste your code</span>
+          <div style="flex:1;height:1px;background:var(--border);"></div>
+        </div>
+
+        <div class="modal-field">
+          <label class="modal-label">Paste your Lua script</label>
+          <textarea class="modal-textarea" style="min-height:140px;font-family:monospace;font-size:13px;" placeholder="-- Paste your existing Lua code here...&#10;local Players = game:GetService('Players')&#10;..."></textarea>
+        </div>
+
+        <div class="modal-field">
+          <label class="modal-label">What do you want DevRift to do?</label>
+          <select class="modal-select">
+            <option>🔧 Optimize & improve my code</option>
+            <option>💰 Add monetization (game passes, items)</option>
+            <option>🐛 Fix bugs & errors</option>
+            <option>📈 Add more features based on trends</option>
+            <option>📝 Add comments & documentation</option>
+          </select>
+        </div>
+
+        <button class="modal-generate-btn" onclick="startGeneration()">
+          🔧 Analyze & Improve Script →
+        </button>
+      </div>
+
+    </div>
+
+    <!-- GENERATING STATE -->
+    <div class="generating-state" id="generatingState">
+      <div class="gen-spinner"></div>
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--dark);">Generating your game...</div>
+      <div style="font-size:13px;color:var(--gray);margin-top:6px;">This takes about 15-30 seconds</div>
+      <div class="gen-steps">
+        <div class="gen-step active" id="step1"><div class="gen-step-dot"></div>Analyzing trending games on Roblox...</div>
+        <div class="gen-step" id="step2"><div class="gen-step-dot"></div>Choosing optimal genre & mechanics...</div>
+        <div class="gen-step" id="step3"><div class="gen-step-dot"></div>Generating complete Lua code...</div>
+        <div class="gen-step" id="step4"><div class="gen-step-dot"></div>Building monetization blueprint...</div>
+        <div class="gen-step" id="step5"><div class="gen-step-dot"></div>Finalizing launch strategy...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Theme
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('devrift-theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  toggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('devrift-theme', next);
+  });
+
+  // Sidebar active
+  function setActive(el) {
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // AI toggle (sidebar)
+  let aiOn = true;
+  function toggleAI(el) {
+    aiOn = !aiOn;
+    document.getElementById('aiSwitch').className = 'toggle-switch ' + (aiOn ? 'on' : 'off');
+    document.getElementById('quickGenre').style.opacity = aiOn ? '0.4' : '1';
+    document.getElementById('quickGenre').style.pointerEvents = aiOn ? 'none' : 'all';
+  }
+
+  // Modal AI toggle
+  let modalAiOn = true;
+  function toggleModalAI() {
+    modalAiOn = !modalAiOn;
+    document.getElementById('modalAiSwitch').className = 'toggle-switch ' + (modalAiOn ? 'on' : 'off');
+    document.getElementById('manualFields').style.opacity = modalAiOn ? '0.4' : '1';
+    document.getElementById('manualFields').style.pointerEvents = modalAiOn ? 'none' : 'all';
+  }
+
+  // Modal tab switch
+  function switchModalTab(tab) {
+    const isGenerate = tab === 'generate';
+    document.getElementById('panelGenerate').style.display = isGenerate ? 'block' : 'none';
+    document.getElementById('panelImport').style.display = isGenerate ? 'none' : 'block';
+    document.getElementById('tabGenerate').style.background = isGenerate ? 'var(--blue)' : 'transparent';
+    document.getElementById('tabGenerate').style.color = isGenerate ? 'white' : 'var(--gray)';
+    document.getElementById('tabImport').style.background = isGenerate ? 'transparent' : 'var(--blue)';
+    document.getElementById('tabImport').style.color = isGenerate ? 'var(--gray)' : 'white';
+  }
+
+  // Modal open/close
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('show');
+    document.getElementById('formState').style.display = 'block';
+    document.getElementById('generatingState').classList.remove('show');
+  }
+
+  function openModalWithGenre(genre) {
+    openModal();
+    document.getElementById('modalGenre').value = genre;
+    modalAiOn = false;
+    document.getElementById('modalAiSwitch').className = 'toggle-switch off';
+    document.getElementById('manualFields').style.opacity = '1';
+    document.getElementById('manualFields').style.pointerEvents = 'all';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('show');
+  }
+
+  function closeModalOnBg(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  // Generation simulation
+  function startGeneration() {
+    document.getElementById('formState').style.display = 'none';
+    document.getElementById('generatingState').classList.add('show');
+
+    const steps = ['step1','step2','step3','step4','step5'];
+    let current = 0;
+
+    const interval = setInterval(() => {
+      if (current > 0) {
+        document.getElementById(steps[current-1]).classList.remove('active');
+        document.getElementById(steps[current-1]).classList.add('done');
+        document.getElementById(steps[current-1]).querySelector('.gen-step-dot').textContent = '';
+        document.getElementById(steps[current-1]).innerHTML = '✅ ' + document.getElementById(steps[current-1]).textContent.trim();
+      }
+      if (current < steps.length) {
+        document.getElementById(steps[current]).classList.add('active');
+        current++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+          closeModal();
+          // Reset for next time
+          document.getElementById('generatingState').classList.remove('show');
+          document.getElementById('formState').style.display = 'block';
+          steps.forEach(s => {
+            const el = document.getElementById(s);
+            el.classList.remove('active','done');
+          });
+        }, 800);
+      }
+    }, 900);
+  }
+</script>
+</body>
+</html>
