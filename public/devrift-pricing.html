@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DevRift — Upgrade Plan</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F4F6FB;
@@ -40,7 +40,7 @@
 
   /* SIDEBAR */
   .sidebar { width:240px; min-height:100vh; background:var(--sidebar-bg); display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0; z-index:50; }
-  .sidebar-logo { padding:24px 24px 20px; border-bottom:1px solid rgba(255,255,255,0.06); font-family:'Syne',sans-serif; font-weight:800; font-size:20px; color:white; letter-spacing:-0.5px; text-decoration:none; display:block; }
+  .sidebar-logo { padding:24px 24px 20px; border-bottom:1px solid rgba(255,255,255,0.06); font-family:'Outfit',sans-serif; font-weight:800; font-size:20px; color:white; letter-spacing:-0.5px; text-decoration:none; display:block; }
   .sidebar-logo span { background:linear-gradient(90deg,#3B82F6,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
   .sidebar-section { padding:20px 16px 8px; font-size:11px; font-weight:700; color:rgba(255,255,255,0.2); text-transform:uppercase; letter-spacing:1.5px; }
   .sidebar-item { display:flex; align-items:center; gap:10px; padding:10px 16px; margin:2px 8px; border-radius:8px; color:rgba(255,255,255,0.5); text-decoration:none; font-size:14px; font-weight:500; transition:all 0.2s; cursor:pointer; }
@@ -59,7 +59,7 @@
 
   /* TOPBAR */
   .topbar { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:var(--surface); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:40; }
-  .topbar-left h1 { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--dark); letter-spacing:-0.5px; }
+  .topbar-left h1 { font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; color:var(--dark); letter-spacing:-0.5px; }
   .topbar-left p { font-size:13px; color:var(--gray); margin-top:1px; }
   .theme-toggle { width:40px; height:22px; background:var(--border); border-radius:100px; border:none; cursor:pointer; position:relative; transition:background 0.3s; }
   .theme-toggle::after { content:''; position:absolute; width:16px; height:16px; background:white; border-radius:50%; top:3px; left:3px; transition:transform 0.3s; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
@@ -72,7 +72,7 @@
   /* HEADER */
   .pricing-header { text-align:center; margin-bottom:48px; opacity:0; animation:fadeUp 0.5s ease 0.05s forwards; }
   .pricing-badge { display:inline-flex; align-items:center; gap:6px; background:var(--blue-light); border:1px solid var(--blue-mid); color:var(--blue); padding:6px 14px; border-radius:100px; font-size:12px; font-weight:700; margin-bottom:16px; letter-spacing:0.3px; }
-  .pricing-title { font-family:'Syne',sans-serif; font-size:38px; font-weight:800; color:var(--dark); letter-spacing:-1.5px; margin-bottom:12px; line-height:1.1; }
+  .pricing-title { font-family:'Outfit',sans-serif; font-size:38px; font-weight:800; color:var(--dark); letter-spacing:-1.5px; margin-bottom:12px; line-height:1.1; }
   .pricing-sub { font-size:16px; color:var(--gray); max-width:500px; margin:0 auto 24px; line-height:1.7; }
 
   /* BILLING TOGGLE */
@@ -109,13 +109,13 @@
     box-shadow:0 4px 12px rgba(37,99,235,0.4);
   }
 
-  .plan-name { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--gray); margin-bottom:12px; }
+  .plan-name { font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--gray); margin-bottom:12px; }
   .plan-card.featured .plan-name { color:rgba(255,255,255,0.5); }
 
   .plan-price-wrap { margin-bottom:6px; display:flex; align-items:flex-end; gap:4px; }
   .plan-currency { font-size:20px; font-weight:700; color:var(--dark); margin-bottom:6px; }
   .plan-card.featured .plan-currency { color:white; }
-  .plan-price { font-family:'Syne',sans-serif; font-size:48px; font-weight:800; color:var(--dark); letter-spacing:-3px; line-height:1; }
+  .plan-price { font-family:'Outfit',sans-serif; font-size:48px; font-weight:800; color:var(--dark); letter-spacing:-3px; line-height:1; }
   .plan-card.featured .plan-price { color:white; }
   .plan-period { font-size:14px; color:var(--gray); margin-bottom:4px; }
   .plan-card.featured .plan-period { color:rgba(255,255,255,0.4); }
@@ -159,9 +159,9 @@
   .modal-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 80% at 80% 50%, rgba(59,130,246,0.15) 0%, transparent 60%); }
   .modal-header-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size:32px 32px; }
   .modal-plan-name { position:relative; z-index:1; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.4); margin-bottom:8px; }
-  .modal-plan-title { position:relative; z-index:1; font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.5px; margin-bottom:4px; }
+  .modal-plan-title { position:relative; z-index:1; font-family:'Outfit',sans-serif; font-size:24px; font-weight:800; color:white; letter-spacing:-0.5px; margin-bottom:4px; }
   .modal-plan-price { position:relative; z-index:1; font-size:15px; color:rgba(255,255,255,0.5); }
-  .modal-plan-price strong { color:white; font-size:20px; font-family:'Syne',sans-serif; font-weight:800; }
+  .modal-plan-price strong { color:white; font-size:20px; font-family:'Outfit',sans-serif; font-weight:800; }
   .modal-close { position:absolute; top:16px; right:16px; z-index:2; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); border-radius:8px; width:30px; height:30px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:rgba(255,255,255,0.6); font-size:14px; transition:all 0.2s; }
   .modal-close:hover { background:rgba(255,255,255,0.15); color:white; }
 
@@ -213,14 +213,14 @@
   .success-state.show { display:block; }
   .success-icon { font-size:56px; margin-bottom:16px; animation:popIn 0.4s cubic-bezier(0.16,1,0.3,1); }
   @keyframes popIn { from{transform:scale(0)} to{transform:scale(1)} }
-  .success-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:var(--dark); letter-spacing:-0.5px; margin-bottom:8px; }
+  .success-title { font-family:'Outfit',sans-serif; font-size:24px; font-weight:800; color:var(--dark); letter-spacing:-0.5px; margin-bottom:8px; }
   .success-sub { font-size:15px; color:var(--gray); line-height:1.7; margin-bottom:24px; }
   .success-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:linear-gradient(135deg,var(--blue),var(--cyan)); color:white; border:none; border-radius:10px; font-size:15px; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; text-decoration:none; }
   .success-btn:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(37,99,235,0.35); }
 
   /* FAQ */
   .faq-section { opacity:0; animation:fadeUp 0.5s ease 0.3s forwards; }
-  .faq-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--dark); letter-spacing:-0.5px; text-align:center; margin-bottom:24px; }
+  .faq-title { font-family:'Outfit',sans-serif; font-size:22px; font-weight:800; color:var(--dark); letter-spacing:-0.5px; text-align:center; margin-bottom:24px; }
   .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .faq-item { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px 24px; }
   .faq-q { font-size:14px; font-weight:700; color:var(--dark); margin-bottom:8px; }
