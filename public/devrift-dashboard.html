@@ -1022,7 +1022,7 @@
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="topbar-left">
-      <h1>Dashboard</h1>
+      <h1 id="hello-user">Dashboard</h1>
       <p id="current-date">· Roblox trends updated 2 hours ago</p>
     </div>
     <div class="topbar-right">
@@ -1587,11 +1587,12 @@
       }
     }, 900);
   }
-</script>
 <script>
 const d = new Date();
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', options) + ' · Roblox trends updated 2 hours ago';
+const username = localStorage.getItem('username');
+if (username) document.getElementById('hello-user').textContent = 'Hello, ' + username + ' 👋';
 </script>
 </body>
 </html>

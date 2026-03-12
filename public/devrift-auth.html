@@ -818,6 +818,9 @@
           <label for="signup-password">Password</label>
           <div class="input-wrap">
             <span class="input-icon">🔒</span>
+            <div class="input-group">
+  <input type="text" id="signup-username" placeholder="Username" autocomplete="username">
+</div>
             <input type="password" id="signup-password" placeholder="Min. 8 characters" autocomplete="new-password" oninput="checkStrength(this.value)">
             <button class="pw-toggle" onclick="togglePw('signup-password', this)">👁</button>
           </div>
@@ -947,6 +950,7 @@
   // Sign up
   function handleSignup() {
     const name = document.getElementById('signup-name').value.trim();
+    const username = document.getElementById('signup-username').value.trim();
     const email = document.getElementById('signup-email').value.trim();
     const pw = document.getElementById('signup-password').value;
     let valid = true;
@@ -977,6 +981,7 @@
     btn.classList.add('loading');
     setTimeout(() => {
       btn.classList.remove('loading');
+      localStorage.setItem('username', username);
       document.getElementById('signup-success').classList.add('show');
       setTimeout(() => { window.location.href = '/devrift-dashboard.html'; }, 1000);
     }, 1800);
