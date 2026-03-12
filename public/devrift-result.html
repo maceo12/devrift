@@ -609,7 +609,7 @@
               <div class="cdot" style="background:#FEBC2E"></div>
               <div class="cdot" style="background:#28C840"></div>
             </div>
-            <span class="code-filename">SpaceTycoon_v3.lua — DevRift AI · 187 lines</span>
+            <span class="code-filename" id="codeFilename">SpaceTycoon_v3.lua — DevRift AI · <span id="lineCount">187</span> lines</span>
           </div>
           <div class="code-actions">
             <button class="code-action-btn" onclick="copyCode(this)">📋 Copy</button>
@@ -722,7 +722,7 @@
             <div class="t-title">Set up in Roblox Studio</div>
             <div class="t-desc">Paste the generated Lua code into Roblox Studio and configure your game passes and settings.</div>
             <div class="t-tasks">
-              <div class="t-task">Copy SpaceTycoon_v3.lua into ServerScriptService</div>
+              <div class="t-task">Copy <span class="lua-filename">GameScript.lua</span> into ServerScriptService</div>
               <div class="t-task">Create 4 Game Passes with recommended prices</div>
               <div class="t-task">Set game to public and test with friends</div>
               <div class="t-task">Configure thumbnail with space aesthetic</div>
@@ -1065,7 +1065,11 @@
     const bar = document.getElementById('streamingBar');
     pre.innerHTML = '';
     bar.style.display = 'flex';
-
+// Update filename
+const theme = localStorage.getItem('generatedTheme') || 'Space';
+const genre = localStorage.getItem('generatedGenre') || 'Tycoon';
+const filenameEl = document.getElementById('codeFilename');
+if (filenameEl) filenameEl.innerHTML = `${theme}${genre}_v3.lua — DevRift AI · <span id="lineCount">${lines.length}</span> lines`;
     const lines = code.split('\n');
     let li = 0;
 
