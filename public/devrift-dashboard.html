@@ -1023,7 +1023,7 @@
   <div class="topbar">
     <div class="topbar-left">
       <h1>Dashboard</h1>
-      <p>Tuesday, March 10, 2026 · Roblox trends updated 2 hours ago</p>
+      <p id="current-date">· Roblox trends updated 2 hours ago</p>
     </div>
     <div class="topbar-right">
       <button class="theme-toggle" id="themeToggle"></button>
@@ -1587,6 +1587,11 @@
       }
     }, 900);
   }
+</script>
+<script>
+const d = new Date();
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', options) + ' · Roblox trends updated 2 hours ago';
 </script>
 </body>
 </html>
