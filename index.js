@@ -20,7 +20,9 @@ const supabase = createClient(
   process.env.SUPABASE_URL || 'https://xqejbamnakovaxksctsi.supabase.co',
   process.env.SUPABASE_KEY || 'sb_publishable_wKy4pUESJJnfMQ0sQDF7kw_l8bFMaqM'
 )
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+const anthropic = new Anthropic({ 
+  apiKey: process.env.ANTHROPIC_API_KEY || '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'
+})
 console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
 // Generate Lua code
 app.post('/api/generate', async (req, res) => {
