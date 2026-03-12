@@ -12,12 +12,10 @@ app.use(cors({ origin: 'https://devrift.vercel.app' }))
 app.use(express.static('public'))
 
 const { createClient } = require('@supabase/supabase-js')
-const stripeLib = require('stripe')
 const stripe = process.env.STRIPE_SECRET_KEY ? stripeLib(process.env.STRIPE_SECRET_KEY) : null
 const Anthropic = require('@anthropic-ai/sdk')
 
-const supabase = createClient(
-  let supabase
+let supabase
 if (process.env.SUPABASE_URL && process.env.SUPABASE_KEY) {
   supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
 }
