@@ -19,7 +19,7 @@ setTimeout(() => {
     process.env.SUPABASE_KEY
   )
 }, 0)
-const stripe = stripeLib(process.env.STRIPE_SECRET_KEY)
+const stripe = process.env.STRIPE_SECRET_KEY ? stripeLib(process.env.STRIPE_SECRET_KEY) : null
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 app.post('/api/generate', async (req, res) => {
