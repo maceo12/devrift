@@ -940,6 +940,7 @@
     setTimeout(() => {
       btn.classList.remove('loading');
       document.getElementById('signin-success').classList.add('show');
+      setTimeout(() => { window.location.href = '/devrift-dashboard.html'; }, 1000);
     }, 1800);
   }
 
@@ -977,6 +978,7 @@
     setTimeout(() => {
       btn.classList.remove('loading');
       document.getElementById('signup-success').classList.add('show');
+      setTimeout(() => { window.location.href = '/devrift-dashboard.html'; }, 1000);
     }, 1800);
   }
 
