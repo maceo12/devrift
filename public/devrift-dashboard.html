@@ -1589,6 +1589,7 @@
         body: JSON.stringify({ genre, theme, description })
       });
       const data = await res.json();
+      console.log('API response:', data);
       clearInterval(interval);
 
       // Mark remaining steps done
