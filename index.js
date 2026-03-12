@@ -7,6 +7,8 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 const PORT = process.env.PORT || 3000
 app.use(express.json())
+const cors = require('cors')
+app.use(cors({ origin: 'https://devrift.vercel.app' }))
 app.use(express.static('public'))
 
 const { createClient } = require('@supabase/supabase-js')
