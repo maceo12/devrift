@@ -16,7 +16,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL || 'https://xqejbamnakovaxksctsi.s
 const SUPABASE_KEY = process.env.SUPABASE_KEY || 'sb_publishable_wKy4pUESJJnfMQ0sQDF7kw_l8bFMaqM'
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const stripe = process.env.STRIPE_SECRET_KEY ? stripeLib(process.env.STRIPE_SECRET_KEY) : null
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY || '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' })
 
 app.post('/api/generate', async (req, res) => {
   try {
