@@ -10,9 +10,13 @@ app.use(express.json())
 app.use(express.static('public'))
 
 const { createClient } = require('@supabase/supabase-js')
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const Anthropic = require('@anthropic-ai/sdk')
+
+let supabase
+if (process.env.SUPABASE_URL && process.env.SUPABASE_KEY) {
+  supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
+}
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
 // Generate Lua code
