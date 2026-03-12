@@ -9,7 +9,8 @@ const PORT = process.env.PORT || 3000
 app.use(express.json())
 app.use(express.static('public'))
 
-const supabase = require('./supabase')
+const { createClient } = require('@supabase/supabase-js')
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const Anthropic = require('@anthropic-ai/sdk')
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
