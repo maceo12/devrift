@@ -1039,8 +1039,65 @@
     addLine();
   }
 
-  // Start streaming on load
-  window.addEventListener('load', () => setTimeout(streamCode, 600));
+  // Start streaming on load — use real generated code if available
+  window.addEventListener('load', () => {
+    const realCode = localStorage.getItem('generatedCode');
+    const genre = localStorage.getItem('generatedGenre') || 'Space';
+    const theme = localStorage.getItem('generatedTheme') || 'Tycoon';
+
+    // Update title if we have real data
+    if (realCode) {
+      const titleEl = document.querySelector('.result-title');
+      if (titleEl) titleEl.textContent = `🚀 ${theme} ${genre} — Generated`;
+    }
+
+    setTimeout(() => {
+      if (realCode) {
+        streamRealCode(realCode);
+      } else {
+        streamCode();
+      }
+    }, 600);
+  });
+
+  function streamRealCode(code) {
+    const pre = document.getElementById('codeBlock');
+    const bar = document.getElementById('streamingBar');
+    pre.innerHTML = '';
+    bar.style.display = 'flex';
+
+    const lines = code.split('\n');
+    let li = 0;
+
+    function addLine() {
+      if (li >= lines.length) {
+        bar.style.display = 'none';
+        return;
+      }
+      const num = li + 1;
+      const text = lines[li]
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;');
+
+      // Basic syntax highlighting
+      let html = text
+        .replace(/(--[^\n]*)/g, '<span class="c-comment">$1</span>')
+        .replace(/\b(local|function|end|if|then|else|elseif|while|do|for|in|return|and|or|not|true|false|nil)\b/g, '<span class="c-kw">$1</span>')
+        .replace(/"([^"]*)"/g, '<span class="c-str">"$1"</span>')
+        .replace(/\b(\d+)\b/g, '<span class="c-num">$1</span>');
+
+      const div = document.createElement('div');
+      div.className = 'line';
+      div.innerHTML = `<span class="line-num">${String(num).padStart(3,' ')}</span><span>${html}</span>`;
+      pre.appendChild(div);
+      li++;
+      const scroll = document.getElementById('codeScroll');
+      scroll.scrollTop = scroll.scrollHeight;
+      setTimeout(addLine, 18);
+    }
+    addLine();
+  }
 </script>
 </body>
 </html>

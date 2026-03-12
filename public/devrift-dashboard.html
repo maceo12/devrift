@@ -1388,19 +1388,19 @@
             </div>
             <div class="modal-field">
               <label class="modal-label">Theme</label>
-              <select class="modal-select">
-                <option>🚀 Space</option>
-                <option>🏰 Medieval</option>
-                <option>🌆 City / Modern</option>
-                <option>🌊 Ocean</option>
-                <option>🔮 Fantasy</option>
+              <select class="modal-select" id="modalTheme">
+                <option value="Space">🚀 Space</option>
+                <option value="Medieval">🏰 Medieval</option>
+                <option value="City">🌆 City / Modern</option>
+                <option value="Ocean">🌊 Ocean</option>
+                <option value="Fantasy">🔮 Fantasy</option>
               </select>
             </div>
           </div>
 
           <div class="modal-field">
             <label class="modal-label">Game description (optional)</label>
-            <textarea class="modal-textarea" placeholder="e.g. A space tycoon where players build rocket factories and earn Robux by launching satellites..."></textarea>
+            <textarea class="modal-textarea" id="modalDesc" placeholder="e.g. A space tycoon where players build rocket factories and earn Robux by launching satellites..."></textarea>
           </div>
 
           <div class="modal-row">
@@ -1554,14 +1554,21 @@
     if (e.target === document.getElementById('modalOverlay')) closeModal();
   }
 
-  // Generation simulation
-  function startGeneration() {
+  const API = 'https://devrift-production.up.railway.app';
+
+  // Generation — real API call
+  async function startGeneration() {
+    const genre = document.getElementById('modalGenre')?.value || 'Tycoon';
+    const theme = document.getElementById('modalTheme')?.value || 'Space';
+    const description = document.getElementById('modalDesc')?.value || '';
+
     document.getElementById('formState').style.display = 'none';
     document.getElementById('generatingState').classList.add('show');
 
     const steps = ['step1','step2','step3','step4','step5'];
     let current = 0;
 
+    // Animate steps while waiting for API
     const interval = setInterval(() => {
       if (current > 0) {
         document.getElementById(steps[current-1]).classList.remove('active');
@@ -1572,20 +1579,51 @@
       if (current < steps.length) {
         document.getElementById(steps[current]).classList.add('active');
         current++;
-      } else {
-        clearInterval(interval);
-        setTimeout(() => {
-          closeModal();
-          // Reset for next time
-          document.getElementById('generatingState').classList.remove('show');
-          document.getElementById('formState').style.display = 'block';
-          steps.forEach(s => {
-            const el = document.getElementById(s);
-            el.classList.remove('active','done');
-          });
-        }, 800);
       }
     }, 900);
+
+    try {
+      const res = await fetch(`${API}/api/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ genre, theme, description })
+      });
+      const data = await res.json();
+      clearInterval(interval);
+
+      // Mark remaining steps done
+      steps.forEach(s => {
+        const el = document.getElementById(s);
+        if (!el.classList.contains('done')) {
+          el.classList.add('done');
+          el.innerHTML = '✅ ' + el.textContent.trim();
+        }
+      });
+
+      setTimeout(() => {
+        closeModal();
+        document.getElementById('generatingState').classList.remove('show');
+        document.getElementById('formState').style.display = 'block';
+        steps.forEach(s => {
+          const el = document.getElementById(s);
+          el.classList.remove('active','done');
+        });
+        // Store generated code and redirect to result page
+        localStorage.setItem('generatedCode', data.code);
+        localStorage.setItem('generatedGenre', genre);
+        localStorage.setItem('generatedTheme', theme);
+        window.location.href = '/devrift-result.html';
+      }, 800);
+    } catch (err) {
+      clearInterval(interval);
+      document.getElementById('generatingState').classList.remove('show');
+      document.getElementById('formState').style.display = 'block';
+      steps.forEach(s => {
+        const el = document.getElementById(s);
+        el.classList.remove('active','done');
+      });
+      alert('Generation failed. Please try again.');
+    }
   }
 </script>
 <script>

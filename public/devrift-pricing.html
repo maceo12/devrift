@@ -544,15 +544,29 @@
     el.value = v;
   }
 
-  // Payment processing simulation
-  function processPayment() {
+  const API = 'https://devrift-production.up.railway.app';
+
+  // Payment processing — real Stripe checkout
+  async function processPayment() {
     const btn = document.getElementById('checkoutBtn');
     btn.classList.add('loading');
-    setTimeout(() => {
+    try {
+      const res = await fetch(`${API}/api/create-checkout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: currentPlan })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        btn.classList.remove('loading');
+        alert('Checkout error. Please try again.');
+      }
+    } catch (err) {
       btn.classList.remove('loading');
-      document.getElementById('checkoutForm').style.display = 'none';
-      document.getElementById('successState').classList.add('show');
-    }, 2200);
+      alert('Connection error. Please try again.');
+    }
   }
 </script>
 </body>

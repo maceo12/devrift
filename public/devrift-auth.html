@@ -916,7 +916,9 @@
   }
 
   // Sign in
-  function handleSignin() {
+  const API = 'https://devrift-production.up.railway.app';
+
+  async function handleSignin() {
     const email = document.getElementById('signin-email').value.trim();
     const pw = document.getElementById('signin-password').value;
     let valid = true;
@@ -940,15 +942,32 @@
 
     const btn = document.getElementById('signin-btn');
     btn.classList.add('loading');
-    setTimeout(() => {
+    try {
+      const res = await fetch(`${API}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pw })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        btn.classList.remove('loading');
+        showError('signin-pw-error', data.error || 'Invalid email or password');
+        document.getElementById('signin-password').classList.add('error');
+        return;
+      }
+      localStorage.setItem('session', JSON.stringify(data.session));
+      localStorage.setItem('username', data.session?.user?.email?.split('@')[0] || 'User');
       btn.classList.remove('loading');
       document.getElementById('signin-success').classList.add('show');
       setTimeout(() => { window.location.href = '/devrift-dashboard.html'; }, 1000);
-    }, 1800);
+    } catch (err) {
+      btn.classList.remove('loading');
+      showError('signin-pw-error', 'Connection error. Please try again.');
+    }
   }
 
   // Sign up
-  function handleSignup() {
+  async function handleSignup() {
     const name = document.getElementById('signup-name').value.trim();
     const username = document.getElementById('signup-username').value.trim();
     const email = document.getElementById('signup-email').value.trim();
@@ -979,12 +998,27 @@
 
     const btn = document.getElementById('signup-btn');
     btn.classList.add('loading');
-    setTimeout(() => {
+    try {
+      const res = await fetch(`${API}/api/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pw })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        btn.classList.remove('loading');
+        showError('signup-email-error', data.error || 'Registration failed');
+        document.getElementById('signup-email').classList.add('error');
+        return;
+      }
+      localStorage.setItem('username', username || name);
       btn.classList.remove('loading');
-      localStorage.setItem('username', username);
       document.getElementById('signup-success').classList.add('show');
       setTimeout(() => { window.location.href = '/devrift-dashboard.html'; }, 1000);
-    }, 1800);
+    } catch (err) {
+      btn.classList.remove('loading');
+      showError('signup-email-error', 'Connection error. Please try again.');
+    }
   }
 
   // Enter key
