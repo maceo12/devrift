@@ -10,7 +10,8 @@ app.use(express.json())
 app.use(express.static('public'))
 
 const { createClient } = require('@supabase/supabase-js')
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const stripeLib = require('stripe')
+const stripe = process.env.STRIPE_SECRET_KEY ? stripeLib(process.env.STRIPE_SECRET_KEY) : null
 const Anthropic = require('@anthropic-ai/sdk')
 
 let supabase
