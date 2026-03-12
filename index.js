@@ -12,13 +12,9 @@ app.use(express.json())
 app.use(cors({ origin: '*' }))
 app.use(express.static('public'))
 
-let supabase
-setTimeout(() => {
-  supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_KEY
-  )
-}, 0)
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://xqejbamnakovaxksctsi.supabase.co'
+const SUPABASE_KEY = process.env.SUPABASE_KEY || 'sb_publishable_wKy4pUESJJnfMQ0sQDF7kw_l8bFMaqM'
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const stripe = process.env.STRIPE_SECRET_KEY ? stripeLib(process.env.STRIPE_SECRET_KEY) : null
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
