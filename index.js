@@ -14,7 +14,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const Anthropic = require('@anthropic-ai/sdk')
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
 // Generate Lua code
 app.post('/api/generate', async (req, res) => {
   const { genre, theme, description } = req.body
