@@ -17,12 +17,11 @@ const stripe = process.env.STRIPE_SECRET_KEY ? stripeLib(process.env.STRIPE_SECR
 const Anthropic = require('@anthropic-ai/sdk')
 
 const supabase = createClient(
-  process.env.SUPABASE_URL || 'https://xqejbamnakovaxksctsi.supabase.co',
-  process.env.SUPABASE_KEY || 'sb_publishable_wKy4pUESJJnfMQ0sQDF7kw_l8bFMaqM'
-)
-const anthropic = new Anthropic({ 
-  apiKey: process.env.ANTHROPIC_API_KEY || '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'
-})
+  let supabase
+if (process.env.SUPABASE_URL && process.env.SUPABASE_KEY) {
+  supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
+}
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
 // Generate Lua code
 app.post('/api/generate', async (req, res) => {
