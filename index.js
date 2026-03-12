@@ -8,7 +8,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 app.use(express.json())
 const cors = require('cors')
-aapp.use(cors({ origin: '*' }))
+app.use(cors({ origin: '*' }))
 app.use(express.static('public'))
 
 const { createClient } = require('@supabase/supabase-js')
