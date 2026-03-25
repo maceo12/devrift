@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevRift — Generated: Space Tycoon</title>
+<title>DevRift — Generated Code</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -53,33 +53,18 @@
     transition: background 0.3s, color 0.3s;
   }
 
-  /* SIDEBAR */
   .sidebar {
-    width: 240px;
-    min-height: 100vh;
-    background: var(--sidebar-bg);
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    z-index: 50;
+    width: 240px; min-height: 100vh; background: var(--sidebar-bg);
+    display: flex; flex-direction: column; position: fixed;
+    top: 0; left: 0; bottom: 0; z-index: 50;
   }
-
   .sidebar-logo {
-    padding: 24px 24px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 800;
-    font-size: 20px;
-    color: white;
-    letter-spacing: -0.5px;
-    text-decoration: none;
-    display: block;
+    padding: 24px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px;
+    color: white; letter-spacing: -0.5px; text-decoration: none; display: block;
   }
   .sidebar-logo span { background: linear-gradient(90deg,#3B82F6,#06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
   .sidebar-section { padding: 20px 16px 8px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 1.5px; }
-
   .sidebar-item {
     display: flex; align-items: center; gap: 10px;
     padding: 10px 16px; margin: 2px 8px; border-radius: 8px;
@@ -89,34 +74,26 @@
   .sidebar-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
   .sidebar-item.active { background: linear-gradient(135deg,rgba(59,130,246,0.2),rgba(6,182,212,0.1)); color: white; border: 1px solid rgba(59,130,246,0.2); }
   .sidebar-item .icon { font-size: 16px; width: 20px; text-align: center; }
-
   .sidebar-badge { margin-left: auto; background: var(--blue); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 100px; }
-
   .sidebar-bottom { margin-top: auto; padding: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
   .user-card { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); cursor: pointer; }
   .user-avatar { width: 32px; height: 32px; background: linear-gradient(135deg,#3B82F6,#06B6D4); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
   .user-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
   .user-plan { font-size: 11px; color: rgba(255,255,255,0.3); }
 
-  /* MAIN */
   .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
 
-  /* TOPBAR */
   .topbar {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 32px;
-    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 16px 32px; background: var(--surface); border-bottom: 1px solid var(--border);
     position: sticky; top: 0; z-index: 40;
   }
-
   .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 14px; }
   .breadcrumb a { color: var(--gray); text-decoration: none; transition: color 0.2s; }
   .breadcrumb a:hover { color: var(--blue); }
   .breadcrumb span { color: var(--dim); }
   .breadcrumb strong { color: var(--dark); font-weight: 600; }
-
   .topbar-right { display: flex; align-items: center; gap: 10px; }
-
   .theme-toggle { width: 40px; height: 22px; background: var(--border); border-radius: 100px; border: none; cursor: pointer; position: relative; transition: background 0.3s; }
   .theme-toggle::after { content: ''; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
   [data-theme="dark"] .theme-toggle { background: var(--blue); }
@@ -126,11 +103,9 @@
     display: flex; align-items: center; gap: 6px;
     padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
     background: var(--surface); color: var(--text); font-size: 13px; font-weight: 600;
-    font-family: 'DM Sans', sans-serif; cursor: pointer; text-decoration: none;
-    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; text-decoration: none; transition: all 0.2s;
   }
   .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
-
   .btn-primary {
     display: flex; align-items: center; gap: 6px;
     padding: 9px 18px; background: linear-gradient(135deg, var(--blue), var(--cyan));
@@ -140,177 +115,152 @@
   }
   .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(37,99,235,0.4); }
 
-  /* CONTENT */
   .content { padding: 28px 32px; flex: 1; }
 
-  /* RESULT HEADER */
   .result-header {
-    background: var(--sidebar-bg);
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeUp 0.5s ease 0.05s forwards;
+    background: var(--sidebar-bg); border-radius: 16px; padding: 28px 32px;
+    margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between;
+    position: relative; overflow: hidden; opacity: 0; animation: fadeUp 0.5s ease 0.05s forwards;
   }
-
   .result-header::before {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(59,130,246,0.12) 0%, transparent 60%),
                 radial-gradient(ellipse 30% 50% at 20% 50%, rgba(6,182,212,0.06) 0%, transparent 50%);
   }
-
   .result-header-grid {
     position: absolute; inset: 0;
     background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
     background-size: 32px 32px;
   }
-
   .result-header-left { position: relative; z-index: 1; }
-
   .result-badge {
     display: inline-flex; align-items: center; gap: 6px;
     background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
     color: #4ADE80; padding: 4px 12px; border-radius: 100px;
     font-size: 12px; font-weight: 700; margin-bottom: 14px; letter-spacing: 0.3px;
   }
-
   .badge-pulse { width: 6px; height: 6px; background: #4ADE80; border-radius: 50%; box-shadow: 0 0 8px #4ADE80; animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
-
-  .result-title {
-    font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800;
-    color: white; letter-spacing: -1px; margin-bottom: 8px;
-  }
-
+  .result-title { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: white; letter-spacing: -1px; margin-bottom: 8px; }
   .result-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-
-  .meta-chip {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500;
-  }
-
-  .result-header-right {
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
-  }
-
-  .score-circle {
-    width: 80px; height: 80px;
-    background: conic-gradient(#22C55E calc(94 * 1%), rgba(255,255,255,0.08) 0);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-
-  .score-circle::before {
-    content: '';
-    position: absolute; inset: 6px;
-    background: #0F172A; border-radius: 50%;
-  }
-
+  .meta-chip { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500; }
+  .result-header-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  .score-circle { width: 80px; height: 80px; background: conic-gradient(#22C55E calc(94 * 1%), rgba(255,255,255,0.08) 0); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
+  .score-circle::before { content: ''; position: absolute; inset: 6px; background: #0F172A; border-radius: 50%; }
   .score-inner { position: relative; z-index: 1; text-align: center; }
   .score-num-big { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; color: #22C55E; line-height: 1; }
   .score-label-small { font-size: 9px; color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 0.5px; }
-
-  .revenue-badge {
-    background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.2);
-    padding: 8px 16px; border-radius: 10px; text-align: center;
-  }
+  .revenue-badge { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.2); padding: 8px 16px; border-radius: 10px; text-align: center; }
   .revenue-value { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; color: #4ADE80; }
   .revenue-label { font-size: 11px; color: rgba(255,255,255,0.4); }
-
   @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 
-  /* TABS */
   .result-tabs {
-    display: flex; gap: 4px;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 4px;
-    margin-bottom: 20px;
+    display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 4px; margin-bottom: 20px;
     opacity: 0; animation: fadeUp 0.5s ease 0.1s forwards;
   }
-
   .result-tab {
-    flex: 1; padding: 10px 12px;
-    border: none; border-radius: 8px; background: transparent;
-    color: var(--gray); font-size: 13px; font-weight: 600;
-    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
+    flex: 1; padding: 10px 12px; border: none; border-radius: 8px; background: transparent;
+    color: var(--gray); font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
   }
-
   .result-tab.active { background: var(--blue); color: white; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
 
-  /* PANELS */
   .result-panel { display: none; }
   .result-panel.active { display: block; }
 
-  /* CODE PANEL */
-  .code-wrapper {
+  .code-sections-container {
+    display: flex; flex-direction: column; gap: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease 0.15s forwards;
+  }
+
+  .code-section {
     background: var(--code-bg);
     border: 1px solid var(--code-border);
     border-radius: 16px;
     overflow: hidden;
-    opacity: 0; animation: fadeUp 0.5s ease 0.15s forwards;
+    transition: border-color 0.2s;
   }
+  .code-section:hover { border-color: rgba(59,130,246,0.3); }
 
-  .code-topbar {
+  .section-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 20px;
     background: rgba(255,255,255,0.03);
     border-bottom: 1px solid rgba(255,255,255,0.06);
+    gap: 12px;
   }
 
-  .code-dots { display: flex; gap: 6px; }
-  .cdot { width: 10px; height: 10px; border-radius: 50%; }
-
-  .code-filename {
-    font-family: 'JetBrains Mono', monospace; font-size: 12px;
-    color: rgba(255,255,255,0.35); margin-left: 10px;
+  .section-header-left {
+    display: flex; align-items: center; gap: 12px; min-width: 0;
   }
 
-  .code-actions { display: flex; gap: 8px; }
+  .section-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0; font-weight: 700;
+  }
 
-  .code-action-btn {
+  .section-icon.server { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.25); }
+  .section-icon.client { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.25); }
+  .section-icon.shared { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.25); }
+  .section-icon.storage { background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.25); }
+
+  .section-info { min-width: 0; }
+
+  .section-location {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .section-hint {
+    font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .section-hint-path {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .section-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+  .section-copy-btn {
     padding: 6px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.7);
     font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
     cursor: pointer; transition: all 0.2s;
   }
-  .code-action-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-  .code-action-btn.copied { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.4); color: #4ADE80; }
+  .section-copy-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+  .section-copy-btn.copied { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.4); color: #4ADE80; }
 
-  .code-scroll { overflow-y: auto; max-height: 520px; }
+  .section-collapse-btn {
+    width: 32px; height: 32px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5);
+    font-size: 12px; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .section-collapse-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+  .section-collapse-btn.collapsed { transform: rotate(-90deg); }
 
+  .section-code-wrap {
+    overflow: hidden; transition: max-height 0.3s ease;
+  }
+  .section-code-wrap.collapsed { max-height: 0 !important; }
+
+  .code-scroll { overflow-y: auto; max-height: 420px; }
   .code-scroll::-webkit-scrollbar { width: 6px; }
   .code-scroll::-webkit-scrollbar-track { background: transparent; }
   .code-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
 
   pre {
-    padding: 24px 28px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    line-height: 2;
-    color: #E2E8F0;
-    white-space: pre;
-    counter-reset: line;
+    padding: 20px 24px; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; line-height: 2; color: #E2E8F0; white-space: pre;
   }
-
   .line { display: flex; }
-  .line-num {
-    width: 36px; flex-shrink: 0;
-    color: rgba(255,255,255,0.15);
-    user-select: none;
-    text-align: right;
-    padding-right: 20px;
-    font-size: 12px;
-  }
-
+  .line-num { width: 36px; flex-shrink: 0; color: rgba(255,255,255,0.15); user-select: none; text-align: right; padding-right: 20px; font-size: 12px; }
   .c-comment { color: #4B5563; font-style: italic; }
   .c-kw { color: #C084FC; }
   .c-fn { color: #60A5FA; }
@@ -319,140 +269,84 @@
   .c-num { color: #67E8F9; }
   .c-op { color: #94A3B8; }
 
-  /* STREAMING INDICATOR */
-  .streaming-bar {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 20px;
-    background: rgba(59,130,246,0.08);
-    border-top: 1px solid rgba(59,130,246,0.15);
-    font-size: 12px; color: rgba(255,255,255,0.5);
+  .section-line-count {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: rgba(255,255,255,0.25); padding: 6px 20px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.01);
   }
 
+  .streaming-bar {
+    display: none; align-items: center; gap: 10px; padding: 10px 20px;
+    background: rgba(59,130,246,0.08); border-top: 1px solid rgba(59,130,246,0.15);
+    border-radius: 0 0 16px 16px;
+    font-size: 12px; color: rgba(255,255,255,0.5);
+  }
+  .streaming-bar.show { display: flex; }
   .stream-dots span {
     display: inline-block; width: 4px; height: 4px;
-    background: var(--blue); border-radius: 50; margin: 0 2px;
+    background: var(--blue); border-radius: 50%; margin: 0 2px;
     animation: bounce 1.2s infinite;
   }
   .stream-dots span:nth-child(2) { animation-delay: 0.2s; }
   .stream-dots span:nth-child(3) { animation-delay: 0.4s; }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 
-  /* MONETIZATION PANEL */
-  .mono-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-
-  .mono-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 20px; opacity: 0; animation: fadeUp 0.5s ease forwards;
+  .quick-guide {
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 20px 24px; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease 0.08s forwards;
   }
-
-  .mono-card:nth-child(1) { animation-delay: 0.1s; }
-  .mono-card:nth-child(2) { animation-delay: 0.15s; }
-  .mono-card:nth-child(3) { animation-delay: 0.2s; }
-  .mono-card:nth-child(4) { animation-delay: 0.25s; }
-
-  .mono-card-icon { font-size: 24px; margin-bottom: 10px; }
-  .mono-card-title { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
-  .mono-card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 14px; }
-  .mono-card-value { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--green); }
-  .mono-card-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
-
-  .passes-list { display: flex; flex-direction: column; gap: 10px; }
-
-  .pass-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 16px;
-    background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
-    opacity: 0; animation: fadeUp 0.4s ease forwards;
+  .quick-guide-title {
+    font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
+    color: var(--dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
   }
-
-  .pass-item:nth-child(1){animation-delay:0.1s} .pass-item:nth-child(2){animation-delay:0.15s}
-  .pass-item:nth-child(3){animation-delay:0.2s} .pass-item:nth-child(4){animation-delay:0.25s}
-
-  .pass-info { flex: 1; }
-  .pass-name { font-size: 14px; font-weight: 600; color: var(--dark); }
-  .pass-desc { font-size: 12px; color: var(--gray); margin-top: 2px; }
-  .pass-price { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--blue); }
-  .pass-conv { font-size: 11px; color: var(--dim); text-align: right; }
-
-  /* LAUNCH PANEL */
-  .launch-timeline { display: flex; flex-direction: column; gap: 0; }
-
-  .timeline-item {
-    display: flex; gap: 20px;
-    opacity: 0; animation: fadeUp 0.4s ease forwards;
+  .quick-guide-steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;
   }
-
-  .timeline-item:nth-child(1){animation-delay:0.05s} .timeline-item:nth-child(2){animation-delay:0.1s}
-  .timeline-item:nth-child(3){animation-delay:0.15s} .timeline-item:nth-child(4){animation-delay:0.2s}
-  .timeline-item:nth-child(5){animation-delay:0.25s}
-
-  .timeline-left { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
-
-  .t-dot {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--blue-light); border: 2px solid var(--blue-mid);
+  .guide-step {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 14px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+  .guide-step-num {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 15px; flex-shrink: 0;
+    font-size: 11px; font-weight: 800; color: white;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
   }
+  .guide-step-text { flex: 1; }
+  .guide-step-text strong { color: var(--dark); }
 
-  .t-line { flex: 1; width: 2px; background: var(--border); margin: 4px 0; min-height: 24px; }
-
-  .timeline-content {
-    padding-bottom: 28px;
-    flex: 1;
-  }
-
-  .t-week { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
-  .t-title { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
-  .t-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
-
-  .t-tasks { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
-  .t-task {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: var(--text);
-    padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
-  }
-  .t-task::before { content: '→'; color: var(--blue); font-weight: 700; }
-
-  /* AI REGENERATE SECTION */
   .regen-bar {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px;
-    background: var(--blue-light); border: 1.5px solid var(--blue-mid);
+    padding: 16px 20px; background: var(--blue-light); border: 1.5px solid var(--blue-mid);
     border-radius: 12px; margin-bottom: 20px;
     opacity: 0; animation: fadeUp 0.5s ease 0.08s forwards;
   }
-
   .regen-text { font-size: 14px; font-weight: 600; color: var(--blue); }
   .regen-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
-
   .regen-btn {
     padding: 8px 18px; background: var(--blue); color: white;
     border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
-    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s;
-    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; white-space: nowrap;
   }
   .regen-btn:hover { background: #1D4ED8; transform: translateY(-1px); }
 
-  /* PROMPT INPUT */
   .prompt-area {
     background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px;
     padding: 16px 20px; margin-bottom: 20px; transition: border-color 0.2s;
     opacity: 0; animation: fadeUp 0.5s ease 0.12s forwards;
   }
   .prompt-area:focus-within { border-color: var(--blue); }
-
   .prompt-label { font-size: 12px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
-
   .prompt-input {
     width: 100%; background: none; border: none; outline: none;
     color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif;
     line-height: 1.6; resize: none; min-height: 52px;
   }
-
   .prompt-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
   .prompt-hint { font-size: 12px; color: var(--dim); }
-
   .prompt-submit {
     padding: 8px 18px; background: linear-gradient(135deg, var(--blue), var(--cyan));
     color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
@@ -461,42 +355,80 @@
   }
   .prompt-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,0.35); }
 
-  /* LOADING OVERLAY */
+  .mono-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .mono-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; opacity: 0; animation: fadeUp 0.5s ease forwards; }
+  .mono-card:nth-child(1){animation-delay:0.1s} .mono-card:nth-child(2){animation-delay:0.15s}
+  .mono-card:nth-child(3){animation-delay:0.2s} .mono-card:nth-child(4){animation-delay:0.25s}
+  .mono-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .mono-card-title { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+  .mono-card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 14px; }
+  .mono-card-value { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--green); }
+  .mono-card-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
+  .passes-list { display: flex; flex-direction: column; gap: 10px; }
+  .pass-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    opacity: 0; animation: fadeUp 0.4s ease forwards;
+  }
+  .pass-item:nth-child(1){animation-delay:0.1s} .pass-item:nth-child(2){animation-delay:0.15s}
+  .pass-item:nth-child(3){animation-delay:0.2s} .pass-item:nth-child(4){animation-delay:0.25s}
+  .pass-info { flex: 1; }
+  .pass-name { font-size: 14px; font-weight: 600; color: var(--dark); }
+  .pass-desc { font-size: 12px; color: var(--gray); margin-top: 2px; }
+  .pass-price { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--blue); }
+  .pass-conv { font-size: 11px; color: var(--dim); text-align: right; }
+
+  .launch-timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item { display: flex; gap: 20px; opacity: 0; animation: fadeUp 0.4s ease forwards; }
+  .timeline-item:nth-child(1){animation-delay:0.05s} .timeline-item:nth-child(2){animation-delay:0.1s}
+  .timeline-item:nth-child(3){animation-delay:0.15s} .timeline-item:nth-child(4){animation-delay:0.2s}
+  .timeline-item:nth-child(5){animation-delay:0.25s}
+  .timeline-left { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
+  .t-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-light); border: 2px solid var(--blue-mid); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .t-line { flex: 1; width: 2px; background: var(--border); margin: 4px 0; min-height: 24px; }
+  .timeline-content { padding-bottom: 28px; flex: 1; }
+  .t-week { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .t-title { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .t-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+  .t-tasks { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .t-task { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text); padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+  .t-task::before { content: '→'; color: var(--blue); font-weight: 700; }
+
   .loading-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
     z-index: 300; display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none; transition: opacity 0.3s;
   }
   .loading-overlay.show { opacity: 1; pointer-events: all; }
-
   .loading-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
     padding: 40px 48px; text-align: center; max-width: 400px; width: 90%;
     transform: scale(0.95); transition: transform 0.3s;
   }
   .loading-overlay.show .loading-card { transform: scale(1); }
-
-  .loading-spinner {
-    width: 52px; height: 52px;
-    border: 3px solid var(--border); border-top-color: var(--blue);
-    border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px;
-  }
+  .loading-spinner { width: 52px; height: 52px; border: 3px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
   .loading-title { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
   .loading-sub { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
-
   .loading-steps { display: flex; flex-direction: column; gap: 8px; text-align: left; }
   .lstep { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray); padding: 8px 12px; border-radius: 8px; transition: all 0.3s; }
   .lstep.active { background: var(--blue-light); color: var(--blue); font-weight: 600; }
   .lstep.done { color: var(--green); }
   .lstep-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  .copy-all-float {
+    position: fixed; bottom: 24px; right: 32px; z-index: 60;
+    padding: 12px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: white; border: none; border-radius: 12px; font-size: 14px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.4); transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .copy-all-float:hover { transform: translateY(-2px); box-shadow: 0 6px 32px rgba(37,99,235,0.5); }
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
   <a href="devrift-final.html" class="sidebar-logo">Dev<span>Rift</span></a>
   <div class="sidebar-section">Main</div>
@@ -520,43 +452,37 @@
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="main">
-
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="breadcrumb">
       <a href="devrift-dashboard.html">Dashboard</a>
       <span>›</span>
       <a href="#">My Projects</a>
       <span>›</span>
-      <strong>Space Tycoon v3</strong>
+      <strong id="breadcrumbTitle">Generated Game</strong>
     </div>
     <div class="topbar-right">
       <button class="theme-toggle" id="themeToggle"></button>
       <a class="btn-outline" href="devrift-dashboard.html">← Back</a>
-      <button class="btn-outline" onclick="copyAll()">📋 Copy all</button>
+      <button class="btn-outline" onclick="copyAllSections()">📋 Copy all</button>
       <button class="btn-primary">🚀 Save Project</button>
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
-
-    <!-- RESULT HEADER -->
     <div class="result-header">
       <div class="result-header-grid"></div>
       <div class="result-header-left">
         <div class="result-badge"><div class="badge-pulse"></div> Generated successfully</div>
-        <div class="result-title">🚀 Space Tycoon v3</div>
+        <div class="result-title" id="resultTitle">🚀 Game — Generated</div>
         <div class="result-meta">
-          <div class="meta-chip">🏭 Tycoon</div>
+          <div class="meta-chip" id="metaGenre">🎮 Game</div>
           <div class="meta-chip">·</div>
-          <div class="meta-chip">🚀 Space theme</div>
+          <div class="meta-chip" id="metaTheme">🌍 Theme</div>
           <div class="meta-chip">·</div>
-          <div class="meta-chip">🟢 Beginner</div>
+          <div class="meta-chip" id="metaScripts">📦 5 scripts</div>
           <div class="meta-chip">·</div>
-          <div class="meta-chip">⏱ Generated in 18s</div>
+          <div class="meta-chip">⏱ Just now</div>
         </div>
       </div>
       <div class="result-header-right">
@@ -573,7 +499,6 @@
       </div>
     </div>
 
-    <!-- PROMPT BAR -->
     <div class="regen-bar">
       <div>
         <div class="regen-text">🤖 Want to tweak this generation?</div>
@@ -582,137 +507,110 @@
       <button class="regen-btn" onclick="togglePrompt()">✏️ Modify</button>
     </div>
 
-    <!-- PROMPT INPUT (hidden by default) -->
     <div class="prompt-area" id="promptArea" style="display:none;">
       <div class="prompt-label">Ask DevRift AI</div>
       <textarea class="prompt-input" id="promptInput" placeholder="e.g. Add a VIP game pass for 200 Robux that gives 3x money boost, and add an anti-cheat system..."></textarea>
       <div class="prompt-footer">
         <span class="prompt-hint">💡 Be specific for better results</span>
-        <button class="prompt-submit" onclick="regenerate()">✨ Regenerate <span id="promptArrow">→</span></button>
+        <button class="prompt-submit" onclick="regenerate()">✨ Regenerate →</button>
       </div>
     </div>
 
-    <!-- TABS -->
     <div class="result-tabs">
       <button class="result-tab active" onclick="switchTab('code', this)">💻 Lua Code</button>
       <button class="result-tab" onclick="switchTab('monetization', this)">💰 Monetization Plan</button>
       <button class="result-tab" onclick="switchTab('launch', this)">🚀 Launch Strategy</button>
     </div>
 
-    <!-- CODE PANEL -->
     <div class="result-panel active" id="panel-code">
-      <div class="code-wrapper">
-        <div class="code-topbar">
-          <div style="display:flex;align-items:center;">
-            <div class="code-dots">
-              <div class="cdot" style="background:#FF5F57"></div>
-              <div class="cdot" style="background:#FEBC2E"></div>
-              <div class="cdot" style="background:#28C840"></div>
-            </div>
-            <span class="code-filename" id="codeFilename">SpaceTycoon_v3.lua — DevRift AI · <span id="lineCount">187</span> lines</span>
+      <div class="quick-guide">
+        <div class="quick-guide-title">📋 How to use in Roblox Studio</div>
+        <div class="quick-guide-steps">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div class="guide-step-text">Open <strong>Roblox Studio</strong> and your game place</div>
           </div>
-          <div class="code-actions">
-            <button class="code-action-btn" onclick="copyCode(this)">📋 Copy</button>
-            <button class="code-action-btn">⬇️ Download .lua</button>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div class="guide-step-text">For each section below, create a <strong>new Script</strong> in the indicated location</div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div class="guide-step-text">Click <strong>"Copy"</strong> on each section and paste into the matching script</div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div class="guide-step-text">Hit <strong>Play</strong> to test — all scripts work together automatically</div>
           </div>
         </div>
-        <div class="code-scroll" id="codeScroll">
-          <pre id="codeBlock"></pre>
-        </div>
-        <div class="streaming-bar" id="streamingBar">
-          <div class="stream-dots"><span></span><span></span><span></span></div>
-          <span>DevRift AI is generating your code...</span>
-        </div>
+      </div>
+
+      <div class="code-sections-container" id="codeSections"></div>
+
+      <div class="streaming-bar" id="streamingBar">
+        <div class="stream-dots"><span></span><span></span><span></span></div>
+        <span>DevRift AI is generating your code...</span>
       </div>
     </div>
 
-    <!-- MONETIZATION PANEL -->
     <div class="result-panel" id="panel-monetization">
       <div class="mono-grid">
         <div class="mono-card">
           <div class="mono-card-icon">💰</div>
           <div class="mono-card-title">Estimated Monthly Revenue</div>
-          <div class="mono-card-desc">Based on similar Tycoon games with your configuration and current player trends</div>
+          <div class="mono-card-desc">Based on similar games with your configuration and current player trends</div>
           <div class="mono-card-value">$1,200 – $4,000</div>
           <div class="mono-card-sub">After Roblox's 30% cut</div>
         </div>
         <div class="mono-card">
           <div class="mono-card-icon">👥</div>
           <div class="mono-card-title">Target Player Base</div>
-          <div class="mono-card-desc">Estimated concurrent players needed to hit revenue targets based on Tycoon genre averages</div>
+          <div class="mono-card-desc">Estimated concurrent players needed to hit revenue targets</div>
           <div class="mono-card-value">800 – 2,400</div>
           <div class="mono-card-sub">Concurrent players / day</div>
         </div>
         <div class="mono-card">
           <div class="mono-card-icon">🎫</div>
           <div class="mono-card-title">Game Passes Included</div>
-          <div class="mono-card-desc">Pre-configured in your Lua code with recommended pricing based on top Tycoon games</div>
+          <div class="mono-card-desc">Pre-configured in your Lua code with recommended pricing</div>
           <div class="mono-card-value">4 passes</div>
           <div class="mono-card-sub">Ready to activate in Roblox Studio</div>
         </div>
         <div class="mono-card">
           <div class="mono-card-icon">📈</div>
           <div class="mono-card-title">Break-even Timeline</div>
-          <div class="mono-card-desc">Time to recoup DevRift Pro subscription based on projected revenue trajectory</div>
+          <div class="mono-card-desc">Time to recoup DevRift Pro subscription based on projected revenue</div>
           <div class="mono-card-value">~3 days</div>
           <div class="mono-card-sub">At minimum revenue estimate</div>
         </div>
       </div>
-
-      <div class="code-wrapper" style="background:var(--surface);border-color:var(--border);">
-        <div class="code-topbar" style="background:var(--bg);border-color:var(--border);">
-          <div>
-            <div class="card-title" style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--dark);">🎫 Recommended Game Passes</div>
-          </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+        <div style="display:flex;align-items:center;padding:14px 20px;background:var(--bg);border-bottom:1px solid var(--border);">
+          <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--dark);">🎫 Recommended Game Passes</div>
         </div>
         <div style="padding:16px 20px;">
           <div class="passes-list">
             <div class="pass-item">
-              <div class="pass-info">
-                <div class="pass-name">🚀 VIP Astronaut</div>
-                <div class="pass-desc">3x money multiplier + exclusive VIP rocket ship + golden name tag</div>
-              </div>
-              <div>
-                <div class="pass-price">299 R$</div>
-                <div class="pass-conv">~3.5% conversion</div>
-              </div>
+              <div class="pass-info"><div class="pass-name">🚀 VIP Pass</div><div class="pass-desc">3x money multiplier + exclusive items + golden name tag</div></div>
+              <div><div class="pass-price">299 R$</div><div class="pass-conv">~3.5% conversion</div></div>
             </div>
             <div class="pass-item">
-              <div class="pass-info">
-                <div class="pass-name">⚡ Auto-Collect</div>
-                <div class="pass-desc">Automatically collects money while away — most purchased pass in Tycoon genre</div>
-              </div>
-              <div>
-                <div class="pass-price">149 R$</div>
-                <div class="pass-conv">~8.2% conversion</div>
-              </div>
+              <div class="pass-info"><div class="pass-name">⚡ Auto-Collect</div><div class="pass-desc">Automatically collects money while away — most purchased pass</div></div>
+              <div><div class="pass-price">149 R$</div><div class="pass-conv">~8.2% conversion</div></div>
             </div>
             <div class="pass-item">
-              <div class="pass-info">
-                <div class="pass-name">🌌 Galaxy Bundle</div>
-                <div class="pass-desc">All passes + exclusive galaxy-themed tycoon area + 5x starting cash</div>
-              </div>
-              <div>
-                <div class="pass-price">599 R$</div>
-                <div class="pass-conv">~1.8% conversion</div>
-              </div>
+              <div class="pass-info"><div class="pass-name">🌟 Premium Bundle</div><div class="pass-desc">All passes + exclusive area + 5x starting cash</div></div>
+              <div><div class="pass-price">599 R$</div><div class="pass-conv">~1.8% conversion</div></div>
             </div>
             <div class="pass-item">
-              <div class="pass-info">
-                <div class="pass-name">🎮 2x XP Boost</div>
-                <div class="pass-desc">Double XP gains permanently — ideal for players who want to progress faster</div>
-              </div>
-              <div>
-                <div class="pass-price">99 R$</div>
-                <div class="pass-conv">~11% conversion</div>
-              </div>
+              <div class="pass-info"><div class="pass-name">🎮 2x XP Boost</div><div class="pass-desc">Double XP gains permanently — progress faster</div></div>
+              <div><div class="pass-price">99 R$</div><div class="pass-conv">~11% conversion</div></div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- LAUNCH PANEL -->
     <div class="result-panel" id="panel-launch">
       <div class="launch-timeline">
         <div class="timeline-item">
@@ -720,12 +618,12 @@
           <div class="timeline-content">
             <div class="t-week">Week 1</div>
             <div class="t-title">Set up in Roblox Studio</div>
-            <div class="t-desc">Paste the generated Lua code into Roblox Studio and configure your game passes and settings.</div>
+            <div class="t-desc">Create scripts at each location shown above and paste the corresponding code.</div>
             <div class="t-tasks">
-              <div class="t-task">Copy <span class="lua-filename">GameScript.lua</span> into ServerScriptService</div>
+              <div class="t-task">Create scripts in ServerScriptService, StarterPlayerScripts, ReplicatedStorage</div>
               <div class="t-task">Create 4 Game Passes with recommended prices</div>
               <div class="t-task">Set game to public and test with friends</div>
-              <div class="t-task">Configure thumbnail with space aesthetic</div>
+              <div class="t-task">Configure thumbnail and game icon</div>
             </div>
           </div>
         </div>
@@ -748,7 +646,7 @@
           <div class="timeline-content">
             <div class="t-week">Week 3–4</div>
             <div class="t-title">Optimize based on data</div>
-            <div class="t-desc">Use Roblox Analytics to identify drop-off points and optimize game pass conversion.</div>
+            <div class="t-desc">Use Roblox Analytics to identify drop-off points and optimize.</div>
             <div class="t-tasks">
               <div class="t-task">Check average session length (target: 15+ min)</div>
               <div class="t-task">A/B test game pass pricing (±20%)</div>
@@ -761,10 +659,10 @@
           <div class="timeline-content">
             <div class="t-week">Month 2+</div>
             <div class="t-title">Scale to $1k+/month</div>
-            <div class="t-desc">Once the game is stable and retaining players, scale up promotion to hit revenue targets.</div>
+            <div class="t-desc">Scale up promotion to hit revenue targets.</div>
             <div class="t-tasks">
               <div class="t-task">Contact Roblox YouTubers for paid reviews ($50–200)</div>
-              <div class="t-task">Add seasonal events (Halloween, Christmas) for viral spikes</div>
+              <div class="t-task">Add seasonal events for viral spikes</div>
               <div class="t-task">Generate a second game with DevRift to cross-promote</div>
             </div>
           </div>
@@ -774,7 +672,7 @@
           <div class="timeline-content">
             <div class="t-week">Month 3–6</div>
             <div class="t-title">Hit top 1,000 games</div>
-            <div class="t-desc">At this stage, your game should be earning consistently and building a community.</div>
+            <div class="t-desc">Build a community and earn consistently.</div>
             <div class="t-tasks">
               <div class="t-task">Build a Discord server for your game community</div>
               <div class="t-task">Release major updates every 2–3 weeks</div>
@@ -788,7 +686,10 @@
   </div>
 </div>
 
-<!-- LOADING OVERLAY (for regeneration) -->
+<button class="copy-all-float" id="copyAllFloat" onclick="copyAllSections()" style="display:none;">
+  📋 Copy all scripts
+</button>
+
 <div class="loading-overlay" id="loadingOverlay">
   <div class="loading-card">
     <div class="loading-spinner"></div>
@@ -804,7 +705,6 @@
 </div>
 
 <script>
-  // Theme
   const toggle = document.getElementById('themeToggle');
   const html = document.documentElement;
   const saved = localStorage.getItem('devrift-theme');
@@ -815,7 +715,6 @@
     localStorage.setItem('devrift-theme', next);
   });
 
-  // Tabs
   function switchTab(tab, btn) {
     document.querySelectorAll('.result-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.result-panel').forEach(p => p.classList.remove('active'));
@@ -823,21 +722,23 @@
     document.getElementById('panel-' + tab).classList.add('active');
   }
 
-  // Prompt toggle
   function togglePrompt() {
     const area = document.getElementById('promptArea');
     area.style.display = area.style.display === 'none' ? 'block' : 'none';
     if (area.style.display === 'block') document.getElementById('promptInput').focus();
   }
 
-  // Regenerate with loading animation
   function regenerate() {
     const overlay = document.getElementById('loadingOverlay');
     overlay.classList.add('show');
     const steps = ['ls1','ls2','ls3','ls4'];
     let i = 0;
     const iv = setInterval(() => {
-      if (i > 0) { document.getElementById(steps[i-1]).classList.remove('active'); document.getElementById(steps[i-1]).classList.add('done'); document.getElementById(steps[i-1]).innerHTML = '✅ ' + document.getElementById(steps[i-1]).textContent.trim(); }
+      if (i > 0) {
+        document.getElementById(steps[i-1]).classList.remove('active');
+        document.getElementById(steps[i-1]).classList.add('done');
+        document.getElementById(steps[i-1]).innerHTML = '✅ ' + document.getElementById(steps[i-1]).textContent.trim();
+      }
       if (i < steps.length) { document.getElementById(steps[i]).classList.add('active'); i++; }
       else {
         clearInterval(iv);
@@ -846,262 +747,194 @@
           document.getElementById('promptArea').style.display = 'none';
           document.getElementById('promptInput').value = '';
           steps.forEach(s => { const el = document.getElementById(s); el.classList.remove('active','done'); });
-          streamCode();
         }, 600);
       }
     }, 900);
   }
 
-  // Code copy
-  function copyCode(btn) {
-    const code = document.getElementById('codeBlock').innerText;
-    navigator.clipboard.writeText(code).then(() => {
-      btn.textContent = '✅ Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 Copy'; btn.classList.remove('copied'); }, 2000);
-    });
+  const SECTION_META = {
+    'ServerScriptService': { icon: '🖥️', type: 'server', hint: 'Server-side script — runs on the Roblox server only', path: 'game > ServerScriptService' },
+    'StarterPlayerScripts': { icon: '🎮', type: 'client', hint: 'Client-side script — runs on each player\'s device', path: 'game > StarterPlayer > StarterPlayerScripts' },
+    'ReplicatedStorage': { icon: '📦', type: 'shared', hint: 'ModuleScript — shared between server and client', path: 'game > ReplicatedStorage' },
+    'ServerStorage': { icon: '🗄️', type: 'storage', hint: 'Server-only storage — not visible to clients', path: 'game > ServerStorage' },
+    'StarterGui': { icon: '🖼️', type: 'client', hint: 'GUI script — manages player interface', path: 'game > StarterGui' },
+    'Workspace': { icon: '🌍', type: 'shared', hint: 'Workspace script — visible to all', path: 'game > Workspace' },
+  };
+
+  function getSectionMeta(location) {
+    const service = location.split('/')[0];
+    return SECTION_META[service] || { icon: '📄', type: 'shared', hint: 'Paste in the indicated location', path: 'game > ' + service };
   }
 
-  function copyAll() {
-    const code = document.getElementById('codeBlock').innerText;
-    navigator.clipboard.writeText(code);
-  }
+  function parseCodeSections(fullCode) {
+    const markerRegex = /^---\s*\[([^\]]+)\]\s*---\s*$/;
+    const lines = fullCode.split('\n');
+    const sections = [];
+    let current = null;
 
-  // CODE STREAMING SIMULATION
-  const luaCode = [
-    ['comment', '-- ═══════════════════════════════════════════════'],
-    ['comment', '--   SPACE TYCOON v3 — Generated by DevRift AI'],
-    ['comment', '--   Trend Score: 94/100  |  Est. $1.2k–$4k/mo'],
-    ['comment', '-- ═══════════════════════════════════════════════'],
-    ['plain', ''],
-    ['kw', 'local '],['var', 'Players'],['plain', ' = '],['fn', 'game'],['plain', ':'],['fn', 'GetService'],['plain', '('],['str', '"Players"'],['plain', ')'],
-    ['kw', 'local '],['var', 'ReplicatedStorage'],['plain', ' = '],['fn', 'game'],['plain', ':'],['fn', 'GetService'],['plain', '('],['str', '"ReplicatedStorage"'],['plain', ')'],
-    ['kw', 'local '],['var', 'MarketplaceService'],['plain', ' = '],['fn', 'game'],['plain', ':'],['fn', 'GetService'],['plain', '('],['str', '"MarketplaceService"'],['plain', ')'],
-    ['plain', ''],
-    ['comment', '-- ── Game Pass IDs (replace with your own) ──'],
-    ['kw', 'local '],['var', 'GAME_PASSES'],['plain', ' = {'],
-    ['plain', '  VIP        = '],['num', '123456789'],['plain', ',   '],['comment', '-- 299 R$ | 3x multiplier'],
-    ['plain', '  AutoCollect = '],['num', '987654321'],['plain', ',  '],['comment', '-- 149 R$ | idle earnings'],
-    ['plain', '  Galaxy     = '],['num', '111222333'],['plain', ',   '],['comment', '-- 599 R$ | bundle'],
-    ['plain', '  XPBoost    = '],['num', '444555666'],['plain', '    '],['comment', '-- 99 R$  | 2x XP'],
-    ['plain', '}'],
-    ['plain', ''],
-    ['comment', '-- ── Player config ──'],
-    ['kw', 'local '],['var', 'CONFIG'],['plain', ' = {'],
-    ['plain', '  startCash     = '],['num', '100'],['plain', ','],
-    ['plain', '  cashPerSecond = '],['num', '5'],['plain', ','],
-    ['plain', '  vipMultiplier = '],['num', '3'],['plain', ','],
-    ['plain', '  xpPerAction   = '],['num', '10'],['plain', ','],
-    ['plain', '  maxLevel      = '],['num', '50'],
-    ['plain', '}'],
-    ['plain', ''],
-    ['comment', '-- ── Setup player data ──'],
-    ['kw', 'local function '],['fn', 'setupLeaderstats'],['plain', '('],['var', 'player'],['plain', ')'],
-    ['plain', '  '],['kw', 'local '],['var', 'stats'],['plain', ' = '],['fn', 'Instance'],['plain', '.'],['fn', 'new'],['plain', '('],['str', '"Folder"'],['plain', ')'],
-    ['plain', '  '],['var', 'stats'],['plain', '.Name = '],['str', '"leaderstats"'],
-    ['plain', '  '],['var', 'stats'],['plain', '.Parent = '],['var', 'player'],
-    ['plain', '  '],['kw', 'local '],['var', 'cash'],['plain', ' = '],['fn', 'Instance'],['plain', '.'],['fn', 'new'],['plain', '('],['str', '"IntValue"'],['plain', ')'],
-    ['plain', '  '],['var', 'cash'],['plain', '.Name = '],['str', '"💰 Cash"'],
-    ['plain', '  '],['var', 'cash'],['plain', '.Value = '],['var', 'CONFIG'],['plain', '.startCash'],
-    ['plain', '  '],['var', 'cash'],['plain', '.Parent = '],['var', 'stats'],
-    ['plain', '  '],['kw', 'local '],['var', 'level'],['plain', ' = '],['fn', 'Instance'],['plain', '.'],['fn', 'new'],['plain', '('],['str', '"IntValue"'],['plain', ')'],
-    ['plain', '  '],['var', 'level'],['plain', '.Name = '],['str', '"⭐ Level"'],
-    ['plain', '  '],['var', 'level'],['plain', '.Value = '],['num', '1'],
-    ['plain', '  '],['var', 'level'],['plain', '.Parent = '],['var', 'stats'],
-    ['kw', 'end'],
-    ['plain', ''],
-    ['comment', '-- ── Check owned passes ──'],
-    ['kw', 'local function '],['fn', 'hasPass'],['plain', '('],['var', 'player'],['plain', ', '],['var', 'passId'],['plain', ')'],
-    ['plain', '  '],['kw', 'local '],['var', 'ok'],['plain', ', '],['var', 'owns'],['plain', ' = '],['fn', 'pcall'],['plain', '('],['fn', 'function'],['plain', '()'],
-    ['plain', '    '],['kw', 'return '],['var', 'MarketplaceService'],['plain', ':'],['fn', 'UserOwnsGamePassAsync'],['plain', '('],['var', 'player'],['plain', '.UserId, '],['var', 'passId'],['plain', ')'],
-    ['plain', '  '],['kw', 'end'],['plain', ')'],
-    ['plain', '  '],['kw', 'return '],['var', 'ok'],['plain', ' '],['kw', 'and '],['var', 'owns'],
-    ['kw', 'end'],
-    ['plain', ''],
-    ['comment', '-- ── Multiplier for player ──'],
-    ['kw', 'local function '],['fn', 'getMultiplier'],['plain', '('],['var', 'player'],['plain', ')'],
-    ['plain', '  '],['kw', 'local '],['var', 'mult'],['plain', ' = '],['num', '1'],
-    ['plain', '  '],['kw', 'if '],['fn', 'hasPass'],['plain', '('],['var', 'player'],['plain', ', '],['var', 'GAME_PASSES'],['plain', '.VIP) '],['kw', 'then'],
-    ['plain', '    '],['var', 'mult'],['plain', ' = '],['var', 'mult'],['plain', ' * '],['var', 'CONFIG'],['plain', '.vipMultiplier'],
-    ['plain', '  '],['kw', 'end'],
-    ['plain', '  '],['kw', 'if '],['fn', 'hasPass'],['plain', '('],['var', 'player'],['plain', ', '],['var', 'GAME_PASSES'],['plain', '.Galaxy) '],['kw', 'then'],
-    ['plain', '    '],['var', 'mult'],['plain', ' = '],['var', 'mult'],['plain', ' * '],['num', '5'],['plain', '   '],['comment', '-- Galaxy bundle bonus'],
-    ['plain', '  '],['kw', 'end'],
-    ['plain', '  '],['kw', 'return '],['var', 'mult'],
-    ['kw', 'end'],
-    ['plain', ''],
-    ['comment', '-- ── Auto-collect loop ──'],
-    ['kw', 'local function '],['fn', 'startAutoCollect'],['plain', '('],['var', 'player'],['plain', ')'],
-    ['plain', '  '],['fn', 'task'],['plain', '.'],['fn', 'spawn'],['plain', '('],['kw', 'function'],['plain', '()'],
-    ['plain', '    '],['kw', 'while '],['var', 'player'],['plain', '.Parent '],['kw', 'do'],
-    ['plain', '      '],['kw', 'local '],['var', 'mult'],['plain', ' = '],['fn', 'getMultiplier'],['plain', '('],['var', 'player'],['plain', ')'],
-    ['plain', '      '],['kw', 'local '],['var', 'earned'],['plain', ' = '],['var', 'CONFIG'],['plain', '.cashPerSecond * '],['var', 'mult'],
-    ['plain', '      '],['var', 'player'],['plain', '.leaderstats['],['str', '"💰 Cash"'],['plain', '].Value += '],['var', 'earned'],
-    ['plain', '      '],['fn', 'task'],['plain', '.'],['fn', 'wait'],['plain', '('],['num', '1'],['plain', ')'],
-    ['plain', '    '],['kw', 'end'],
-    ['plain', '  '],['kw', 'end'],['plain', ')'],
-    ['kw', 'end'],
-    ['plain', ''],
-    ['comment', '-- ── On player join ──'],
-    ['kw', 'local function '],['fn', 'onPlayerJoin'],['plain', '('],['var', 'player'],['plain', ')'],
-    ['plain', '  '],['fn', 'setupLeaderstats'],['plain', '('],['var', 'player'],['plain', ')'],
-    ['plain', '  '],['kw', 'if '],['fn', 'hasPass'],['plain', '('],['var', 'player'],['plain', ', '],['var', 'GAME_PASSES'],['plain', '.AutoCollect) '],['kw', 'then'],
-    ['plain', '    '],['fn', 'startAutoCollect'],['plain', '('],['var', 'player'],['plain', ')'],
-    ['plain', '  '],['kw', 'end'],
-    ['plain', '  '],['fn', 'print'],['plain', '('],['str', '"✅ '],['var', '" .. player.Name .. "'],['str', ' joined Space Tycoon v3"'],['plain', ')'],
-    ['kw', 'end'],
-    ['plain', ''],
-    ['var', 'Players'],['plain', '.'],['var', 'PlayerAdded'],['plain', ':'],['fn', 'Connect'],['plain', '('],['var', 'onPlayerJoin'],['plain', ')'],
-    ['plain', ''],
-    ['comment', '-- ── Handle existing players ──'],
-    ['kw', 'for '],['plain', '_, '],['var', 'p'],['kw', ' in '],['fn', 'ipairs'],['plain', '('],['var', 'Players'],['plain', ':'],['fn', 'GetPlayers'],['plain', '()) '],['kw', 'do'],
-    ['plain', '  '],['fn', 'onPlayerJoin'],['plain', '('],['var', 'p'],['plain', ')'],
-    ['kw', 'end'],
-    ['plain', ''],
-    ['fn', 'print'],['plain', '('],['str', '"🚀 Space Tycoon v3 loaded — DevRift AI"'],['plain', ')'],
-  ];
-
-  function renderToken(type, text) {
-    const map = { comment:'c-comment', kw:'c-kw', fn:'c-fn', str:'c-str', var:'c-var', num:'c-num', plain:'' };
-    const cls = map[type] || '';
-    return cls ? `<span class="${cls}">${text}</span>` : text;
-  }
-
-  function streamCode() {
-    const pre = document.getElementById('codeBlock');
-    const bar = document.getElementById('streamingBar');
-    pre.innerHTML = '';
-    bar.style.display = 'flex';
-
-    // Group tokens into lines
-    const lines = [];
-    let current = [];
-    const lineBreaks = [4,5,8,9,10,15,16,17,22,23,30,31,37,38,44,45,50,51,57,58,62,63,69,70,75,76,80,81];
-
-    let lineIdx = 1;
-    let tokenIdx = 0;
-    let lineHTML = '';
-    let lineTokens = [];
-
-    // Build line groups
-    const lineGroups = [];
-    let currentLine = [];
-    luaCode.forEach((tok, i) => {
-      if (tok[0] === 'plain' && tok[1] === '') {
-        lineGroups.push(currentLine);
-        currentLine = [];
-        lineGroups.push([['plain','']]);
+    for (const line of lines) {
+      const match = line.match(markerRegex);
+      if (match) {
+        if (current) sections.push(current);
+        current = { location: match[1].trim(), code: '' };
+      } else if (current) {
+        current.code += (current.code ? '\n' : '') + line;
       } else {
-        currentLine.push(tok);
-        // Check if next is a new line by keyword pattern
-        const nextTok = luaCode[i+1];
-        if (!nextTok || (nextTok[0] === 'kw' && currentLine.length > 0 && tok[0] !== 'kw') ||
-            (tok[0] === 'plain' && tok[1].endsWith(')') && nextTok && nextTok[0] === 'kw') ||
-            (tok[0] === 'kw' && tok[1] === 'end') ||
-            (tok[0] === 'plain' && tok[1] === '}')) {
+        if (!current && line.trim()) {
+          current = { location: 'ServerScriptService/MainGame', code: line };
         }
       }
-    });
-
-    // Simpler: just stream all tokens with line numbers
-    let allLines = [];
-    let curL = [];
-    luaCode.forEach(tok => {
-      if (tok[0] === 'plain' && tok[1] === '') {
-        allLines.push(curL);
-        curL = [];
-      } else {
-        curL.push(tok);
-      }
-    });
-    if (curL.length) allLines.push(curL);
-
-    let li = 0;
-    bar.style.display = 'flex';
-
-    function addLine() {
-      if (li >= allLines.length) {
-        bar.style.display = 'none';
-        return;
-      }
-      const tokens = allLines[li];
-      const num = li + 1;
-      const html = tokens.map(t => renderToken(t[0], t[1])).join('');
-      const div = document.createElement('div');
-      div.className = 'line';
-      div.innerHTML = `<span class="line-num">${String(num).padStart(3,' ')}</span><span>${html}</span>`;
-      pre.appendChild(div);
-      li++;
-      const scroll = document.getElementById('codeScroll');
-      scroll.scrollTop = scroll.scrollHeight;
-      setTimeout(addLine, 28);
     }
-    addLine();
+    if (current) sections.push(current);
+
+    sections.forEach(s => {
+      s.code = s.code.replace(/^\n+/, '').replace(/\n+$/, '');
+    });
+
+    return sections.filter(s => s.code.trim().length > 0);
   }
 
-  // Start streaming on load — use real generated code if available
-  window.addEventListener('load', () => {
-    const realCode = localStorage.getItem('generatedCode');
-    const genre = localStorage.getItem('generatedGenre') || 'Space';
-    const theme = localStorage.getItem('generatedTheme') || 'Tycoon';
+  function highlightLua(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/(--[^\n]*)/g, '<span class="c-comment">$1</span>')
+      .replace(/\b(local|function|end|if|then|else|elseif|while|do|for|in|return|and|or|not|true|false|nil|repeat|until|break)\b/g, '<span class="c-kw">$1</span>')
+      .replace(/"([^"]*)"/g, '<span class="c-str">"$1"</span>')
+      .replace(/'([^']*)'/g, '<span class="c-str">\'$1\'</span>')
+      .replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>');
+  }
 
-    // Update title if we have real data
-    if (realCode) {
-      const titleEl = document.querySelector('.result-title');
-      if (titleEl) titleEl.textContent = `🚀 ${theme} ${genre} — Generated`;
-    }
-
-    setTimeout(() => {
-      if (realCode) {
-        streamRealCode(realCode);
-      } else {
-        streamCode();
-      }
-    }, 600);
-  });
-
-  function streamRealCode(code) {
-    const pre = document.getElementById('codeBlock');
+  function streamRealCode(fullCode) {
     const bar = document.getElementById('streamingBar');
-    pre.innerHTML = '';
-    bar.style.display = 'flex';
-// Update filename
-const theme = localStorage.getItem('generatedTheme') || 'Space';
-const genre = localStorage.getItem('generatedGenre') || 'Tycoon';
-const filenameEl = document.getElementById('codeFilename');
-if (filenameEl) filenameEl.innerHTML = `${theme}${genre}_v3.lua — DevRift AI · <span id="lineCount">${lines.length}</span> lines`;
-    const lines = code.split('\n');
-    let li = 0;
+    bar.classList.add('show');
 
-    function addLine() {
-      if (li >= lines.length) {
-        bar.style.display = 'none';
+    const sections = parseCodeSections(fullCode);
+    parsedSections = sections;
+    const container = document.getElementById('codeSections');
+    container.innerHTML = '';
+
+    document.getElementById('metaScripts').textContent = '📦 ' + sections.length + ' scripts';
+
+    let sectionIdx = 0;
+
+    function streamNextSection() {
+      if (sectionIdx >= sections.length) {
+        bar.classList.remove('show');
+        document.getElementById('copyAllFloat').style.display = sections.length > 1 ? 'flex' : 'none';
         return;
       }
-      const num = li + 1;
-      const text = lines[li]
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;');
 
-      // Basic syntax highlighting
-      let html = text
-        .replace(/(--[^\n]*)/g, '<span class="c-comment">$1</span>')
-        .replace(/\b(local|function|end|if|then|else|elseif|while|do|for|in|return|and|or|not|true|false|nil)\b/g, '<span class="c-kw">$1</span>')
-        .replace(/"([^"]*)"/g, '<span class="c-str">"$1"</span>')
-        .replace(/\b(\d+)\b/g, '<span class="c-num">$1</span>');
+      const section = sections[sectionIdx];
+      const meta = getSectionMeta(section.location);
+      const lines = section.code.split('\n');
+      const scriptName = section.location.split('/').pop() || section.location;
 
-      const div = document.createElement('div');
-      div.className = 'line';
-      div.innerHTML = `<span class="line-num">${String(num).padStart(3,' ')}</span><span>${html}</span>`;
-      pre.appendChild(div);
-      li++;
-      const scroll = document.getElementById('codeScroll');
-      scroll.scrollTop = scroll.scrollHeight;
-      setTimeout(addLine, 18);
+      const sectionEl = document.createElement('div');
+      sectionEl.className = 'code-section';
+      sectionEl.style.opacity = '0';
+      sectionEl.style.animation = 'fadeUp 0.4s ease forwards';
+
+      const preId = 'pre-' + sectionIdx;
+      const scrollId = 'scroll-' + sectionIdx;
+
+      sectionEl.innerHTML = '<div class="section-header">' +
+        '<div class="section-header-left">' +
+        '<div class="section-icon ' + meta.type + '">' + meta.icon + '</div>' +
+        '<div class="section-info">' +
+        '<div class="section-location">' + section.location + '</div>' +
+        '<div class="section-hint">' + meta.hint + ' <span class="section-hint-path">' + meta.path + '</span></div>' +
+        '</div></div>' +
+        '<div class="section-actions">' +
+        '<button class="section-copy-btn" onclick="copySectionCode(this, ' + sectionIdx + ')">📋 Copy</button>' +
+        '<button class="section-collapse-btn" onclick="toggleCollapse(this)" title="Collapse/Expand">▼</button>' +
+        '</div></div>' +
+        '<div class="section-code-wrap">' +
+        '<div class="code-scroll" id="' + scrollId + '">' +
+        '<pre id="' + preId + '"></pre>' +
+        '</div>' +
+        '<div class="section-line-count">' + scriptName + '.lua — ' + lines.length + ' lines</div>' +
+        '</div>';
+
+      container.appendChild(sectionEl);
+
+      const pre = document.getElementById(preId);
+      const scroll = document.getElementById(scrollId);
+      let li = 0;
+
+      function addLine() {
+        if (li >= lines.length) {
+          sectionIdx++;
+          setTimeout(streamNextSection, 200);
+          return;
+        }
+        const num = li + 1;
+        const highlighted = highlightLua(lines[li]);
+        const div = document.createElement('div');
+        div.className = 'line';
+        div.innerHTML = '<span class="line-num">' + String(num).padStart(3, ' ') + '</span><span>' + highlighted + '</span>';
+        pre.appendChild(div);
+        scroll.scrollTop = scroll.scrollHeight;
+        li++;
+        setTimeout(addLine, 12);
+      }
+      addLine();
     }
-    addLine();
+
+    streamNextSection();
   }
+
+  let parsedSections = [];
+
+  function copySectionCode(btn, idx) {
+    const code = parsedSections[idx] ? parsedSections[idx].code : '';
+    navigator.clipboard.writeText(code).then(function() {
+      btn.textContent = '✅ Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.textContent = '📋 Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyAllSections() {
+    const fullCode = parsedSections.map(function(s) { return '--- [' + s.location + '] ---\n' + s.code; }).join('\n\n');
+    navigator.clipboard.writeText(fullCode).then(function() {
+      const btn = document.getElementById('copyAllFloat');
+      var origText = btn.innerHTML;
+      btn.innerHTML = '✅ All scripts copied!';
+      setTimeout(function() { btn.innerHTML = origText; }, 2000);
+    });
+  }
+
+  function toggleCollapse(btn) {
+    var wrap = btn.closest('.code-section').querySelector('.section-code-wrap');
+    wrap.classList.toggle('collapsed');
+    btn.classList.toggle('collapsed');
+    btn.textContent = wrap.classList.contains('collapsed') ? '▶' : '▼';
+  }
+
+  var DEMO_CODE = '--- [ServerScriptService/GameManager] ---\n-- Main Game Server — DevRift AI\n\nlocal Players = game:GetService("Players")\nlocal ReplicatedStorage = game:GetService("ReplicatedStorage")\nlocal MarketplaceService = game:GetService("MarketplaceService")\n\nlocal Config = require(ReplicatedStorage:WaitForChild("GameConfig"))\n\nlocal function setupLeaderstats(player)\n  local stats = Instance.new("Folder")\n  stats.Name = "leaderstats"\n  stats.Parent = player\n\n  local cash = Instance.new("IntValue")\n  cash.Name = "Cash"\n  cash.Value = Config.START_CASH\n  cash.Parent = stats\n\n  local level = Instance.new("IntValue")\n  level.Name = "Level"\n  level.Value = 1\n  level.Parent = stats\nend\n\nlocal function hasPass(player, passId)\n  local ok, owns = pcall(function()\n    return MarketplaceService:UserOwnsGamePassAsync(player.UserId, passId)\n  end)\n  return ok and owns\nend\n\nlocal function getMultiplier(player)\n  local mult = 1\n  if hasPass(player, Config.PASSES.VIP) then\n    mult = mult * Config.VIP_MULTIPLIER\n  end\n  return mult\nend\n\nlocal function startAutoCollect(player)\n  task.spawn(function()\n    while player.Parent do\n      local mult = getMultiplier(player)\n      local earned = Config.CASH_PER_SECOND * mult\n      player.leaderstats.Cash.Value += earned\n      task.wait(1)\n    end\n  end)\nend\n\nlocal function onPlayerJoin(player)\n  setupLeaderstats(player)\n  if hasPass(player, Config.PASSES.AutoCollect) then\n    startAutoCollect(player)\n  end\n  print("Player " .. player.Name .. " joined")\nend\n\nPlayers.PlayerAdded:Connect(onPlayerJoin)\nprint("Game server loaded — DevRift AI")\n\n--- [ServerScriptService/AntiCheat] ---\n-- Anti-Cheat System — DevRift AI\n\nlocal Players = game:GetService("Players")\nlocal MAX_SPEED = 50\n\nlocal function monitorPlayer(player)\n  task.spawn(function()\n    local char = player.Character or player.CharacterAdded:Wait()\n    while player.Parent do\n      if char and char:FindFirstChild("HumanoidRootPart") then\n        local velocity = char.HumanoidRootPart.Velocity.Magnitude\n        if velocity > MAX_SPEED then\n          warn("Speed anomaly: " .. player.Name)\n        end\n      end\n      task.wait(2)\n    end\n  end)\nend\n\nPlayers.PlayerAdded:Connect(monitorPlayer)\nprint("Anti-cheat loaded — DevRift AI")\n\n--- [StarterPlayerScripts/ClientUI] ---\n-- Client UI — DevRift AI\n\nlocal Players = game:GetService("Players")\nlocal player = Players.LocalPlayer\nlocal playerGui = player:WaitForChild("PlayerGui")\n\nlocal function showNotification(text, duration)\n  duration = duration or 3\n  local sg = Instance.new("ScreenGui")\n  sg.Parent = playerGui\n\n  local frame = Instance.new("Frame")\n  frame.Size = UDim2.new(0, 300, 0, 50)\n  frame.Position = UDim2.new(0.5, -150, 0, -60)\n  frame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)\n  frame.BorderSizePixel = 0\n  frame.Parent = sg\n\n  local label = Instance.new("TextLabel")\n  label.Size = UDim2.new(1, -20, 1, 0)\n  label.Position = UDim2.new(0, 10, 0, 0)\n  label.BackgroundTransparency = 1\n  label.Text = text\n  label.TextColor3 = Color3.fromRGB(255, 255, 255)\n  label.Font = Enum.Font.GothamBold\n  label.TextSize = 14\n  label.Parent = frame\nend\n\ntask.delay(2, function()\n  showNotification("Welcome, " .. player.Name .. "!")\nend)\n\nprint("Client UI loaded — DevRift AI")\n\n--- [ReplicatedStorage/GameConfig] ---\n-- Shared Config — DevRift AI\n\nlocal Config = {}\n\nConfig.PASSES = {\n  VIP = 123456789,\n  AutoCollect = 987654321,\n  Galaxy = 111222333,\n  XPBoost = 444555666,\n}\n\nConfig.START_CASH = 100\nConfig.CASH_PER_SECOND = 5\nConfig.VIP_MULTIPLIER = 3\nConfig.XP_PER_ACTION = 10\nConfig.MAX_LEVEL = 50\n\nreturn Config';
+
+  window.addEventListener('load', function() {
+    var realCode = localStorage.getItem('generatedCode');
+    var genre = localStorage.getItem('generatedGenre') || 'Game';
+    var theme = localStorage.getItem('generatedTheme') || 'Adventure';
+
+    var titleText = '🚀 ' + theme + ' ' + genre + ' — Generated';
+    document.getElementById('resultTitle').textContent = titleText;
+    document.getElementById('breadcrumbTitle').textContent = theme + ' ' + genre;
+    document.getElementById('metaGenre').textContent = '🎮 ' + genre;
+    document.getElementById('metaTheme').textContent = '🌍 ' + theme;
+    document.title = 'DevRift — ' + theme + ' ' + genre;
+
+    var code = realCode || DEMO_CODE;
+    parsedSections = parseCodeSections(code);
+
+    setTimeout(function() {
+      streamRealCode(code);
+    }, 400);
+  });
 </script>
 </body>
 </html>
+```
