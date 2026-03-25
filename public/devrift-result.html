@@ -795,16 +795,28 @@
   }
 
   function highlightLua(text) {
-    return text
+    var escaped = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/(--[^\n]*)/g, '<span class="c-comment">$1</span>')
-      .replace(/\b(local|function|end|if|then|else|elseif|while|do|for|in|return|and|or|not|true|false|nil|repeat|until|break)\b/g, '<span class="c-kw">$1</span>')
-      .replace(/"([^"]*)"/g, '<span class="c-str">"$1"</span>')
-      .replace(/'([^']*)'/g, '<span class="c-str">\'$1\'</span>')
-      .replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>');
+      .replace(/>/g, '&gt;');
+    
+    // Split by comments first to avoid highlighting inside comments
+    var parts = escaped.split(/(--[^\n]*)/g);
+    var result = '';
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].match(/^--/)) {
+        result += '<span class="c-comment">' + parts[i] + '</span>';
+      } else {
+        result += parts[i]
+          .replace(/\b(local|function|end|if|then|else|elseif|while|do|for|in|return|and|or|not|true|false|nil|repeat|until|break)\b/g, '<span class="c-kw">$1</span>')
+          .replace(/"([^"]*)"/g, '<span class="c-str">"$1"</span>')
+          .replace(/'([^']*)'/g, "<span class=\"c-str\">'$1'</span>")
+          .replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>');
+      }
+    }
+    return result;
   }
+cd C:\Users\maceo\Desktop\devrift; git add .; git commit -m "fix: syntax highlighting"; git push origin master; npx vercel --cwd public --prod
 
   function streamRealCode(fullCode) {
     const bar = document.getElementById('streamingBar');
