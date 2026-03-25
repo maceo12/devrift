@@ -16,7 +16,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL || 'https://xqejbamnakovaxksctsi.s
 const SUPABASE_KEY = process.env.SUPABASE_KEY || 'sb_publishable_wKy4pUESJJnfMQ0sQDF7kw_l8bFMaqM'
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const stripe = process.env.STRIPE_SECRET_KEY ? stripeLib(process.env.STRIPE_SECRET_KEY) : null
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY || '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' })
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 app.post('/api/generate', async (req, res) => {
   try {
@@ -24,7 +24,37 @@ app.post('/api/generate', async (req, res) => {
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 4096,
-      messages: [{ role: 'user', content: `Generate a complete, working Roblox Lua script for a ${genre} game with the theme "${theme}". ${description ? 'Additional details: ' + description : ''} Include: Complete game logic, Player systems, Monetization with game passes, Leaderboard system, Professional code structure with comments. Return ONLY the Lua code, no explanations.` }]
+      messages: [{ role: 'user', content: `Generate a complete, working Roblox Lua game: a ${genre} game with the theme "${theme}".
+${description ? 'Additional details:\n' + description : ''}
+
+CRITICAL RULES FOR CODE STRUCTURE:
+You MUST separate the code into distinct scripts, each labeled with a marker comment on its own line indicating WHERE to place it in Roblox Studio. Use EXACTLY these marker formats:
+
+-- [ServerScriptService] MainGameScript
+-- [StarterPlayerScripts] ClientScript
+-- [ReplicatedStorage] SharedModule
+-- [ServerStorage] DataModule
+-- [StarterGui] GuiScript
+
+Each marker MUST:
+1. Be on its own line
+2. Start with "-- [" followed by the exact Roblox service name and "]"
+3. Include a short script name after the bracket
+
+Between each script section, add a blank line separator.
+
+REQUIREMENTS FOR THE GAME:
+- Complete game logic split properly between server and client
+- Player data / leaderstats (ServerScriptService)
+- Client-side UI and controls (StarterPlayerScripts or StarterGui)
+- Shared modules/configs in ReplicatedStorage
+- Monetization with game passes
+- Leaderboard system
+- Professional code structure with comments explaining each section
+
+Use at least 2 different services (ServerScriptService + one other minimum).
+
+Return ONLY the Lua code with the markers. No explanations, no markdown, no backticks.` }]
     })
     res.json({ code: message.content[0].text })
   } catch (err) {

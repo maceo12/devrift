@@ -1,1103 +1,1053 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevRift — Build Roblox Games with AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>DevRift — Generated Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F8F9FC;
+    --bg: #F4F6FB;
     --surface: #FFFFFF;
-    --surface2: #F0F2F8;
     --border: #E2E6F0;
     --blue: #2563EB;
     --blue-light: #EFF6FF;
     --blue-mid: #BFDBFE;
+    --cyan: #0EA5E9;
     --gray: #6B7280;
     --dark: #0F172A;
     --text: #1E293B;
-    --accent: #0EA5E9;
-    --nav-bg: rgba(248,249,252,0.85);
-    --code-bg: #0F172A;
-    --stat-bg: #FFFFFF;
-    --footer-bg: #0F172A;
-    --footer-text: rgba(255,255,255,0.3);
+    --dim: #94A3B8;
+    --green: #22C55E;
+    --orange: #F97316;
+    --sidebar-bg: #0F172A;
+    --sidebar-text: rgba(255,255,255,0.6);
+    --code-bg: #0D1117;
+    --code-border: #1E2A3D;
   }
 
   [data-theme="dark"] {
     --bg: #080C14;
     --surface: #0D1321;
-    --surface2: #111827;
     --border: #1E2A3D;
     --blue: #3B82F6;
     --blue-light: rgba(59,130,246,0.1);
     --blue-mid: rgba(59,130,246,0.25);
+    --cyan: #06B6D4;
     --gray: #6B7280;
     --dark: #F9FAFB;
     --text: #E2E8F0;
-    --accent: #06B6D4;
-    --nav-bg: rgba(8,12,20,0.85);
-    --code-bg: #0D1321;
-    --stat-bg: #0D1321;
-    --footer-bg: #0D1321;
-    --footer-text: rgba(255,255,255,0.3);
+    --dim: #4B5563;
+    --sidebar-bg: #060A11;
+    --code-bg: #060A11;
+    --code-border: #1E2A3D;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 60px;
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    color: var(--dark);
-    letter-spacing: -0.5px;
-  }
-
-  .logo span { color: var(--blue); }
-
-  nav ul {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-
-  nav ul a {
-    text-decoration: none;
-    color: var(--gray);
-    font-size: 15px;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  nav ul a:hover { color: var(--dark); }
-
-  .nav-cta {
-    background: var(--blue);
-    color: white !important;
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-weight: 600 !important;
-    transition: background 0.2s, transform 0.2s !important;
-  }
-
-  .nav-cta:hover {
-    background: #1D4ED8 !important;
-    transform: translateY(-1px);
-  }
-
-  /* HERO */
-  .hero {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 60px 80px;
-    position: relative;
-    overflow: hidden;
+    transition: background 0.3s, color 0.3s;
   }
 
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity: 0.5;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+  /* SIDEBAR */
+  .sidebar {
+    width: 240px; min-height: 100vh; background: var(--sidebar-bg);
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
   }
-
-  .hero-glow {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    pointer-events: none;
+  .sidebar-logo {
+    padding: 24px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px;
+    color: white; letter-spacing: -0.5px; text-decoration: none; display: block;
   }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--blue-light);
-    border: 1px solid var(--blue-mid);
-    color: var(--blue);
-    padding: 6px 16px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.1s forwards;
+  .sidebar-logo span { background: linear-gradient(90deg,#3B82F6,#06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .sidebar-section { padding: 20px 16px 8px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 1.5px; }
+  .sidebar-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; margin: 2px 8px; border-radius: 8px;
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 14px; font-weight: 500; transition: all 0.2s; cursor: pointer;
   }
+  .sidebar-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+  .sidebar-item.active { background: linear-gradient(135deg,rgba(59,130,246,0.2),rgba(6,182,212,0.1)); color: white; border: 1px solid rgba(59,130,246,0.2); }
+  .sidebar-item .icon { font-size: 16px; width: 20px; text-align: center; }
+  .sidebar-badge { margin-left: auto; background: var(--blue); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 100px; }
+  .sidebar-bottom { margin-top: auto; padding: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .user-card { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); cursor: pointer; }
+  .user-avatar { width: 32px; height: 32px; background: linear-gradient(135deg,#3B82F6,#06B6D4); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+  .user-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
+  .user-plan { font-size: 11px; color: rgba(255,255,255,0.3); }
 
-  .hero-badge::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    background: var(--blue);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
+  /* MAIN */
+  .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
+
+  /* TOPBAR */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px; background: var(--surface); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 40;
   }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .breadcrumb a { color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--blue); }
+  .breadcrumb span { color: var(--dim); }
+  .breadcrumb strong { color: var(--dark); font-weight: 600; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .theme-toggle { width: 40px; height: 22px; background: var(--border); border-radius: 100px; border: none; cursor: pointer; position: relative; transition: background 0.3s; }
+  .theme-toggle::after { content: ''; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+  [data-theme="dark"] .theme-toggle { background: var(--blue); }
+  [data-theme="dark"] .theme-toggle::after { transform: translateX(18px); }
+  .btn-outline {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--surface); color: var(--text); font-size: 13px; font-weight: 600;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; text-decoration: none; transition: all 0.2s;
   }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(42px, 6vw, 76px);
-    font-weight: 800;
-    line-height: 1.08;
-    letter-spacing: -2px;
-    text-align: center;
-    color: var(--dark);
-    max-width: 820px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.2s forwards;
-  }
-
-  h1 .highlight {
-    color: var(--blue);
-    position: relative;
-  }
-
-  h1 .highlight::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--blue), var(--accent));
-    border-radius: 2px;
-    opacity: 0.4;
-  }
-
-  .hero-sub {
-    font-size: 18px;
-    color: var(--gray);
-    text-align: center;
-    max-width: 520px;
-    line-height: 1.7;
-    margin-top: 24px;
-    font-weight: 400;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.35s forwards;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 14px;
-    margin-top: 40px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.5s forwards;
-  }
-
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
   .btn-primary {
-    background: var(--blue);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-    box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 18px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.3); transition: all 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(37,99,235,0.4); }
+
+  /* CONTENT */
+  .content { padding: 28px 32px; flex: 1; }
+
+  /* RESULT HEADER */
+  .result-header {
+    background: var(--sidebar-bg); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; overflow: hidden; opacity: 0; animation: fadeUp 0.5s ease 0.05s forwards;
+  }
+  .result-header::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(59,130,246,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 30% 50% at 20% 50%, rgba(6,182,212,0.06) 0%, transparent 50%);
+  }
+  .result-header-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .result-header-left { position: relative; z-index: 1; }
+  .result-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
+    color: #4ADE80; padding: 4px 12px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; margin-bottom: 14px; letter-spacing: 0.3px;
+  }
+  .badge-pulse { width: 6px; height: 6px; background: #4ADE80; border-radius: 50%; box-shadow: 0 0 8px #4ADE80; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+  .result-title {
+    font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800;
+    color: white; letter-spacing: -1px; margin-bottom: 8px;
+  }
+  .result-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .meta-chip { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500; }
+  .result-header-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  .script-count-badge {
+    background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3);
+    padding: 10px 18px; border-radius: 12px; text-align: center;
+  }
+  .script-count-num { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #60A5FA; line-height: 1; }
+  .script-count-label { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 600; margin-top: 2px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  /* TABS */
+  .result-tabs {
+    display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 4px; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease 0.1s forwards;
+  }
+  .result-tab {
+    flex: 1; padding: 10px 12px; border: none; border-radius: 8px; background: transparent;
+    color: var(--gray); font-size: 13px; font-weight: 600;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .result-tab.active { background: var(--blue); color: white; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
+
+  /* PANELS */
+  .result-panel { display: none; }
+  .result-panel.active { display: block; }
+
+  /* SECTION CARDS */
+  .section-card {
+    background: var(--code-bg); border: 1px solid var(--code-border);
+    border-radius: 16px; overflow: hidden; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease forwards;
+  }
+  .section-card:nth-child(1) { animation-delay: 0.1s; }
+  .section-card:nth-child(2) { animation-delay: 0.18s; }
+  .section-card:nth-child(3) { animation-delay: 0.26s; }
+  .section-card:nth-child(4) { animation-delay: 0.34s; }
+  .section-card:nth-child(5) { animation-delay: 0.42s; }
+
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+  }
+  .section-header-left { display: flex; align-items: center; gap: 12px; }
+
+  .service-icon {
+    width: 36px; height: 36px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+  }
+  .service-icon.server { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.25); }
+  .service-icon.client { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.25); }
+  .service-icon.replicated { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.25); }
+  .service-icon.storage { background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.25); }
+  .service-icon.gui { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.25); }
+
+  .section-service-name {
+    font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: white;
+  }
+  .section-script-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px;
   }
 
-  .btn-primary:hover {
-    background: #1D4ED8;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(37,99,235,0.4);
+  .section-header-right { display: flex; align-items: center; gap: 8px; }
+
+  .section-line-count {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: rgba(255,255,255,0.25); padding: 4px 10px;
+    background: rgba(255,255,255,0.04); border-radius: 6px;
   }
 
-  .btn-secondary {
-    background: var(--surface);
-    color: var(--dark);
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 1.5px solid var(--border);
-    transition: all 0.2s;
+  .section-copy-btn {
+    padding: 6px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.7);
+    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.2s;
   }
+  .section-copy-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+  .section-copy-btn.copied { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.4); color: #4ADE80; }
 
-  .btn-secondary:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-    transform: translateY(-2px);
+  .section-instruction {
+    display: flex; align-items: center; gap: 8px; padding: 10px 20px;
+    background: rgba(59,130,246,0.06); border-bottom: 1px solid rgba(59,130,246,0.1);
+    font-size: 12px; color: rgba(255,255,255,0.5);
   }
+  .section-instruction strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 
-  /* CODE PREVIEW */
-  .code-preview {
-    margin-top: 64px;
-    width: 100%;
-    max-width: 820px;
-    background: #0F172A;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 24px 80px rgba(15,23,42,0.18);
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.65s forwards;
-    border: 1px solid rgba(255,255,255,0.08);
+  .code-scroll { overflow-y: auto; max-height: 400px; }
+  .code-scroll::-webkit-scrollbar { width: 6px; }
+  .code-scroll::-webkit-scrollbar-track { background: transparent; }
+  .code-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+  pre {
+    padding: 20px 24px; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; line-height: 2; color: #E2E8F0; white-space: pre;
   }
+  .line { display: flex; }
+  .line-num { width: 36px; flex-shrink: 0; color: rgba(255,255,255,0.15); user-select: none; text-align: right; padding-right: 20px; font-size: 12px; }
+  .c-comment { color: #4B5563; font-style: italic; }
+  .c-kw { color: #C084FC; }
+  .c-fn { color: #60A5FA; }
+  .c-str { color: #86EFAC; }
+  .c-var { color: #F9A8D4; }
+  .c-num { color: #67E8F9; }
+  .c-op { color: #94A3B8; }
 
-  .code-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 20px;
-    background: rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+  /* STREAMING BAR */
+  .streaming-bar {
+    display: none; align-items: center; gap: 10px; padding: 12px 20px;
+    background: rgba(59,130,246,0.08); border-top: 1px solid rgba(59,130,246,0.15);
+    font-size: 12px; color: rgba(255,255,255,0.5); border-radius: 0 0 16px 16px;
   }
-
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot-red { background: #FF5F57; }
-  .dot-yellow { background: #FEBC2E; }
-  .dot-green { background: #28C840; }
-
-  .code-filename {
-    margin-left: 8px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    font-family: 'DM Mono', monospace;
+  .streaming-bar.show { display: flex; }
+  .stream-dots span {
+    display: inline-block; width: 4px; height: 4px;
+    background: var(--blue); border-radius: 50%; margin: 0 2px;
+    animation: bounce 1.2s infinite;
   }
+  .stream-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .stream-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 
-  .code-body {
-    padding: 28px 32px;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.9;
-    overflow-x: auto;
+  /* HOW-TO BANNER */
+  .howto-banner {
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 16px;
+    opacity: 0; animation: fadeUp 0.5s ease 0.06s forwards;
   }
+  .howto-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .howto-title { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+  .howto-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+  .howto-desc strong { color: var(--text); }
 
-  .code-comment { color: #6B7A99; }
-  .code-keyword { color: #82AAFF; }
-  .code-string { color: #C3E88D; }
-  .code-func { color: #FFCB6B; }
-  .code-var { color: #F78C6C; }
-  .code-num { color: #F07178; }
-
-  /* STATS */
-  .stats {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    padding: 60px;
-    background: var(--stat-bg);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+  /* REGEN BAR */
+  .regen-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; background: var(--blue-light); border: 1.5px solid var(--blue-mid);
+    border-radius: 12px; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease 0.08s forwards;
   }
-
-  .stat { text-align: center; }
-
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 40px;
-    font-weight: 800;
-    color: var(--dark);
-    letter-spacing: -1px;
+  .regen-text { font-size: 14px; font-weight: 600; color: var(--blue); }
+  .regen-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
+  .regen-btn {
+    padding: 8px 18px; background: var(--blue); color: white;
+    border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; white-space: nowrap;
   }
+  .regen-btn:hover { background: #1D4ED8; transform: translateY(-1px); }
 
-  .stat-num span { color: var(--blue); }
-
-  .stat-label {
-    font-size: 14px;
-    color: var(--gray);
-    margin-top: 4px;
-    font-weight: 500;
+  /* PROMPT INPUT */
+  .prompt-area {
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 16px 20px; margin-bottom: 20px; transition: border-color 0.2s;
+    opacity: 0; animation: fadeUp 0.5s ease 0.12s forwards;
   }
-
-  /* FEATURES */
-  .features {
-    padding: 100px 60px;
-    max-width: 1200px;
-    margin: 0 auto;
+  .prompt-area:focus-within { border-color: var(--blue); }
+  .prompt-label { font-size: 12px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .prompt-input {
+    width: 100%; background: none; border: none; outline: none;
+    color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif;
+    line-height: 1.6; resize: none; min-height: 52px;
   }
-
-  .section-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--blue);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: center;
-    margin-bottom: 16px;
+  .prompt-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .prompt-hint { font-size: 12px; color: var(--dim); }
+  .prompt-submit {
+    padding: 8px 18px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
   }
+  .prompt-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,0.35); }
 
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 800;
-    text-align: center;
-    color: var(--dark);
-    letter-spacing: -1.5px;
-    margin-bottom: 16px;
+  /* MONETIZATION PANEL */
+  .mono-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .mono-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 20px; opacity: 0; animation: fadeUp 0.5s ease forwards;
   }
-
-  .section-sub {
-    text-align: center;
-    color: var(--gray);
-    font-size: 17px;
-    max-width: 500px;
-    margin: 0 auto 64px;
-    line-height: 1.7;
+  .mono-card:nth-child(1) { animation-delay: 0.1s; }
+  .mono-card:nth-child(2) { animation-delay: 0.15s; }
+  .mono-card:nth-child(3) { animation-delay: 0.2s; }
+  .mono-card:nth-child(4) { animation-delay: 0.25s; }
+  .mono-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .mono-card-title { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+  .mono-card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 14px; }
+  .mono-card-value { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--green); }
+  .mono-card-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
+  .passes-list { display: flex; flex-direction: column; gap: 10px; }
+  .pass-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    opacity: 0; animation: fadeUp 0.4s ease forwards;
   }
+  .pass-item:nth-child(1){animation-delay:0.1s} .pass-item:nth-child(2){animation-delay:0.15s}
+  .pass-item:nth-child(3){animation-delay:0.2s} .pass-item:nth-child(4){animation-delay:0.25s}
+  .pass-info { flex: 1; }
+  .pass-name { font-size: 14px; font-weight: 600; color: var(--dark); }
+  .pass-desc { font-size: 12px; color: var(--gray); margin-top: 2px; }
+  .pass-price { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--blue); }
+  .pass-conv { font-size: 11px; color: var(--dim); text-align: right; }
 
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+  /* LAUNCH PANEL */
+  .launch-timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item { display: flex; gap: 20px; opacity: 0; animation: fadeUp 0.4s ease forwards; }
+  .timeline-item:nth-child(1){animation-delay:0.05s} .timeline-item:nth-child(2){animation-delay:0.1s}
+  .timeline-item:nth-child(3){animation-delay:0.15s} .timeline-item:nth-child(4){animation-delay:0.2s}
+  .timeline-item:nth-child(5){animation-delay:0.25s}
+  .timeline-left { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
+  .t-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-light); border: 2px solid var(--blue-mid); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .t-line { flex: 1; width: 2px; background: var(--border); margin: 4px 0; min-height: 24px; }
+  .timeline-content { padding-bottom: 28px; flex: 1; }
+  .t-week { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .t-title { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .t-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+  .t-tasks { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .t-task { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text); padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+  .t-task::before { content: '→'; color: var(--blue); font-weight: 700; }
+
+  /* LOADING OVERLAY */
+  .loading-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+    z-index: 300; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
   }
-
-  .feature-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 36px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
+  .loading-overlay.show { opacity: 1; pointer-events: all; }
+  .loading-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+    padding: 40px 48px; text-align: center; max-width: 400px; width: 90%;
+    transform: scale(0.95); transition: transform 0.3s;
   }
-
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--blue), var(--accent));
-    opacity: 0;
-    transition: opacity 0.3s;
+  .loading-overlay.show .loading-card { transform: scale(1); }
+  .loading-spinner {
+    width: 52px; height: 52px; border: 3px solid var(--border); border-top-color: var(--blue);
+    border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px;
   }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-title { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+  .loading-sub { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
+  .loading-steps { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .lstep { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray); padding: 8px 12px; border-radius: 8px; transition: all 0.3s; }
+  .lstep.active { background: var(--blue-light); color: var(--blue); font-weight: 600; }
+  .lstep.done { color: var(--green); }
+  .lstep-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
-  .feature-card:hover {
-    border-color: var(--blue-mid);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(37,99,235,0.1);
+  /* COPY ALL TOAST */
+  .toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--sidebar-bg); color: white; padding: 12px 24px; border-radius: 12px;
+    font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 999;
+    border: 1px solid rgba(255,255,255,0.1);
   }
-
-  .feature-card:hover::before { opacity: 1; }
-
-  .feature-icon {
-    width: 48px;
-    height: 48px;
-    background: var(--blue-light);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-
-  .feature-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 19px;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 10px;
-  }
-
-  .feature-desc {
-    color: var(--gray);
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  /* HOW IT WORKS */
-  .how {
-    background: var(--dark);
-    padding: 100px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .how::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(37,99,235,0.15) 0%, transparent 70%);
-  }
-
-  .how .section-title { color: white; }
-  .how .section-label { color: var(--accent); }
-  .how .section-sub { color: rgba(255,255,255,0.5); }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
-
-  .steps::before {
-    content: '';
-    position: absolute;
-    top: 28px;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(37,99,235,0.5), rgba(14,165,233,0.5), transparent);
-  }
-
-  .step { text-align: center; }
-
-  .step-num {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, var(--blue), var(--accent));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: white;
-    margin: 0 auto 20px;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 4px 20px rgba(37,99,235,0.4);
-  }
-
-  .step-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 10px;
-  }
-
-  .step-desc {
-    color: rgba(255,255,255,0.5);
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  /* PRICING */
-  .pricing {
-    padding: 100px 60px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 0;
-  }
-
-  .pricing-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 20px;
-    padding: 40px;
-    position: relative;
-    transition: all 0.3s;
-  }
-
-  .pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(15,23,42,0.1);
-  }
-
-  .pricing-card.featured {
-    background: var(--dark);
-    border-color: var(--blue);
-    box-shadow: 0 8px 40px rgba(37,99,235,0.2);
-  }
-
-  .pricing-badge {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, var(--blue), var(--accent));
-    color: white;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px 16px;
-    border-radius: 100px;
-    white-space: nowrap;
-  }
-
-  .plan-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-  }
-
-  .featured .plan-name { color: rgba(255,255,255,0.5); }
-
-  .plan-price {
-    font-family: 'Syne', sans-serif;
-    font-size: 52px;
-    font-weight: 800;
-    color: var(--dark);
-    letter-spacing: -2px;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .featured .plan-price { color: white; }
-
-  .plan-price sup {
-    font-size: 24px;
-    font-weight: 600;
-    vertical-align: super;
-    letter-spacing: 0;
-  }
-
-  .plan-period {
-    font-size: 14px;
-    color: var(--gray);
-    margin-bottom: 32px;
-  }
-
-  .featured .plan-period { color: rgba(255,255,255,0.4); }
-
-  .plan-features {
-    list-style: none;
-    margin-bottom: 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .plan-features li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    color: var(--text);
-  }
-
-  .featured .plan-features li { color: rgba(255,255,255,0.8); }
-
-  .plan-features li::before {
-    content: '✓';
-    width: 20px;
-    height: 20px;
-    background: var(--blue-light);
-    color: var(--blue);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .featured .plan-features li::before {
-    background: rgba(37,99,235,0.2);
-    color: var(--accent);
-  }
-
-  .plan-btn {
-    display: block;
-    text-align: center;
-    padding: 14px;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-    border: 1.5px solid var(--border);
-    color: var(--dark);
-  }
-
-  .plan-btn:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-  }
-
-  .plan-btn.featured-btn {
-    background: linear-gradient(135deg, var(--blue), var(--accent));
-    border-color: transparent;
-    color: white;
-    box-shadow: 0 4px 20px rgba(37,99,235,0.4);
-  }
-
-  .plan-btn.featured-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(37,99,235,0.5);
-    color: white;
-  }
-
-  /* CTA */
-  .cta-section {
-    background: linear-gradient(135deg, var(--blue) 0%, #0284C7 100%);
-    padding: 100px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  .cta-section h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 800;
-    color: white;
-    letter-spacing: -1.5px;
-    margin-bottom: 16px;
-    position: relative;
-  }
-
-  .cta-section p {
-    color: rgba(255,255,255,0.7);
-    font-size: 18px;
-    margin-bottom: 40px;
-    position: relative;
-  }
-
-  .cta-section .btn-white {
-    background: white;
-    color: var(--blue);
-    padding: 16px 40px;
-    border-radius: 10px;
-    font-size: 17px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.2s;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  }
-
-  .cta-section .btn-white:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--footer-bg);
-    padding: 40px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  footer .logo { color: white; }
-  footer p { color: var(--footer-text); font-size: 14px; }
-
-  /* DARK MODE TOGGLE */
-  .theme-toggle {
-    width: 44px;
-    height: 24px;
-    background: var(--border);
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    transition: background 0.3s;
-    flex-shrink: 0;
-  }
-
-  .theme-toggle::after {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: white;
-    border-radius: 50%;
-    top: 3px;
-    left: 3px;
-    transition: transform 0.3s, background 0.3s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  }
-
-  [data-theme="dark"] .theme-toggle {
-    background: var(--blue);
-  }
-
-  [data-theme="dark"] .theme-toggle::after {
-    transform: translateX(20px);
-    background: white;
-  }
-
-  .theme-toggle-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--gray);
-  }
-
-  .theme-icon { font-size: 15px; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">Dev<span>Rift</span></div>
-  <ul>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-  </ul>
-  <div style="display:flex; align-items:center; gap:12px;">
-    <div class="theme-toggle-wrap">
-      <span class="theme-icon">☀️</span>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
-      <span class="theme-icon">🌙</span>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <a href="devrift-final.html" class="sidebar-logo">Dev<span>Rift</span></a>
+  <div class="sidebar-section">Main</div>
+  <a class="sidebar-item" href="devrift-dashboard.html"><span class="icon">📊</span> Dashboard</a>
+  <a class="sidebar-item"><span class="icon">🔥</span> Trending Games <span class="sidebar-badge">Live</span></a>
+  <a class="sidebar-item active"><span class="icon">⚡</span> Generate Game</a>
+  <div class="sidebar-section">My Games</div>
+  <a class="sidebar-item"><span class="icon">🎮</span> My Projects <span class="sidebar-badge">3</span></a>
+  <a class="sidebar-item"><span class="icon">📁</span> Saved Code</a>
+  <div class="sidebar-section">Analytics</div>
+  <a class="sidebar-item"><span class="icon">💰</span> Revenue Tracker</a>
+  <a class="sidebar-item"><span class="icon">🔍</span> Competitor Analysis</a>
+  <div class="sidebar-section">Account</div>
+  <a class="sidebar-item"><span class="icon">⚙️</span> Settings</a>
+  <a class="sidebar-item"><span class="icon">💳</span> Upgrade Plan</a>
+  <div class="sidebar-bottom">
+    <div class="user-card">
+      <div class="user-avatar">JR</div>
+      <div><div class="user-name">Jake_RoBuilder</div><div class="user-plan">Pro Plan · 6 gen left</div></div>
     </div>
-    <a href="devrift-auth.html" style="font-size:15px; font-weight:600; color:var(--text); text-decoration:none; padding:10px 18px; border:1.5px solid var(--border); border-radius:8px; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">Sign in</a>
-    <a href="devrift-auth.html" class="nav-cta">Get started free</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-
-  <div class="hero-badge">🎮 AI-powered Roblox game builder</div>
-
-  <h1>Generate your <span class="highlight">Roblox game</span> with AI in minutes</h1>
-
-  <p class="hero-sub">Analyze trending games, generate complete Lua code, and launch your next hit game — no coding experience required.</p>
-
-  <div class="hero-actions">
-    <a href="#" class="btn-primary">Start building for free →</a>
-    <a href="#how" class="btn-secondary">See how it works</a>
-  </div>
-
-  <div class="code-preview">
-    <div class="code-bar">
-      <div class="dot dot-red"></div>
-      <div class="dot dot-yellow"></div>
-      <div class="dot dot-green"></div>
-      <span class="code-filename">SpaceTycoon_Generated.lua</span>
-    </div>
-    <div class="code-body">
-      <div><span class="code-comment">-- 🚀 Space Tycoon — Generated by DevRift AI</span></div>
-      <div><span class="code-comment">-- Trend Score: 94/100 · Est. revenue: $2,400/mo</span></div>
-      <br>
-      <div><span class="code-keyword">local</span> <span class="code-var">Players</span> = <span class="code-func">game</span>:<span class="code-func">GetService</span>(<span class="code-string">"Players"</span>)</div>
-      <div><span class="code-keyword">local</span> <span class="code-var">ReplicatedStorage</span> = <span class="code-func">game</span>:<span class="code-func">GetService</span>(<span class="code-string">"ReplicatedStorage"</span>)</div>
-      <br>
-      <div><span class="code-keyword">local</span> <span class="code-var">GAME_CONFIG</span> = {</div>
-      <div>&nbsp;&nbsp;<span class="code-var">startingCash</span> = <span class="code-num">100</span>,</div>
-      <div>&nbsp;&nbsp;<span class="code-var">tickRate</span> = <span class="code-num">1</span>,</div>
-      <div>&nbsp;&nbsp;<span class="code-var">vipGamepassId</span> = <span class="code-num">123456789</span>,</div>
-      <div>&nbsp;&nbsp;<span class="code-var">vipMultiplier</span> = <span class="code-num">2.5</span></div>
-      <div>}</div>
-      <br>
-      <div><span class="code-keyword">local function</span> <span class="code-func">setupPlayer</span>(<span class="code-var">player</span>)</div>
-      <div>&nbsp;&nbsp;<span class="code-keyword">local</span> <span class="code-var">leaderstats</span> = <span class="code-func">Instance</span>.<span class="code-func">new</span>(<span class="code-string">"Folder"</span>)</div>
-      <div>&nbsp;&nbsp;<span class="code-var">leaderstats</span>.<span class="code-var">Name</span> = <span class="code-string">"leaderstats"</span></div>
-      <div>&nbsp;&nbsp;<span class="code-var">leaderstats</span>.<span class="code-var">Parent</span> = <span class="code-var">player</span></div>
-      <div><span class="code-keyword">end</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="stats fade-in">
-  <div class="stat">
-    <div class="stat-num">3.5<span>M+</span></div>
-    <div class="stat-label">Roblox developers worldwide</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num"><span>$</span>722M</div>
-    <div class="stat-label">Paid out to creators</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">5<span>min</span></div>
-    <div class="stat-label">Average game generation time</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">94<span>%</span></div>
-    <div class="stat-label">Trend prediction accuracy</div>
   </div>
 </div>
 
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="section-label">Features</div>
-  <h2 class="section-title">Everything you need to build & launch</h2>
-  <p class="section-sub">From trend analysis to ready-to-deploy Lua code — DevRift handles the hard part.</p>
-
-  <div class="features-grid">
-    <div class="feature-card fade-in">
-      <div class="feature-icon">📊</div>
-      <div class="feature-title">Real-time Trend Analysis</div>
-      <div class="feature-desc">Track which game genres are rising or saturating. Get daily insights on what players want right now.</div>
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="breadcrumb">
+      <a href="devrift-dashboard.html">Dashboard</a>
+      <span>›</span>
+      <a href="#">My Projects</a>
+      <span>›</span>
+      <strong id="breadcrumbTitle">Generated Game</strong>
     </div>
-    <div class="feature-card fade-in">
-      <div class="feature-icon">⚡</div>
-      <div class="feature-title">Instant Lua Code Generation</div>
-      <div class="feature-desc">Describe your game idea — get complete, working Lua code ready to paste into Roblox Studio in minutes.</div>
-    </div>
-    <div class="feature-card fade-in">
-      <div class="feature-icon">💰</div>
-      <div class="feature-title">Monetization Blueprint</div>
-      <div class="feature-desc">AI-generated game pass strategies, item pricing, and revenue projections based on similar successful games.</div>
-    </div>
-    <div class="feature-card fade-in">
-      <div class="feature-icon">🎯</div>
-      <div class="feature-title">Trend Score System</div>
-      <div class="feature-desc">Every game concept gets a 0-100 trend score based on current platform data — build with confidence, not guesswork.</div>
-    </div>
-    <div class="feature-card fade-in">
-      <div class="feature-icon">🔍</div>
-      <div class="feature-title">Competitor Analysis</div>
-      <div class="feature-desc">See what top-performing games in your niche are doing right — and build something better.</div>
-    </div>
-    <div class="feature-card fade-in">
-      <div class="feature-icon">🚀</div>
-      <div class="feature-title">Launch Checklist</div>
-      <div class="feature-desc">Step-by-step launch guide tailored to your game type — from thumbnails to first 1,000 players strategy.</div>
+    <div class="topbar-right">
+      <button class="theme-toggle" id="themeToggle"></button>
+      <a class="btn-outline" href="devrift-dashboard.html">← Back</a>
+      <button class="btn-outline" onclick="copyAll()">📋 Copy all</button>
+      <button class="btn-primary">🚀 Save Project</button>
     </div>
   </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="how">
-  <div class="section-label">How it works</div>
-  <h2 class="section-title">From idea to playable game in 4 steps</h2>
-  <p class="section-sub">No coding experience needed. Just describe what you want to build.</p>
+  <div class="content">
 
-  <div class="steps">
-    <div class="step fade-in">
-      <div class="step-num">1</div>
-      <div class="step-title">Pick your genre</div>
-      <div class="step-desc">Choose from Tycoon, Simulator, Obby, Horror and more — or let AI suggest based on current trends.</div>
-    </div>
-    <div class="step fade-in">
-      <div class="step-num">2</div>
-      <div class="step-title">Describe your game</div>
-      <div class="step-desc">Tell DevRift your theme, mechanics, and target audience — or let the AI choose everything automatically based on what's trending right now.</div>
-    </div>
-    <div class="step fade-in">
-      <div class="step-num">3</div>
-      <div class="step-title">Get your Lua code</div>
-      <div class="step-desc">Receive complete, working Lua scripts with monetization built in — ready for Roblox Studio.</div>
-    </div>
-    <div class="step fade-in">
-      <div class="step-num">4</div>
-      <div class="step-title">Launch & earn</div>
-      <div class="step-desc">Follow your personalized launch plan and start earning Robux and real $ from day one.</div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="section-label">Pricing</div>
-  <h2 class="section-title">Simple, transparent pricing</h2>
-  <p class="section-sub">Start free, upgrade when you're ready to scale.</p>
-
-  <div class="pricing-grid">
-    <div class="pricing-card fade-in">
-      <div class="plan-name">Free</div>
-      <div class="plan-price"><sup>$</sup>0</div>
-      <div class="plan-period">forever</div>
-      <ul class="plan-features">
-        <li>1 game generation/month</li>
-        <li>Basic trend dashboard</li>
-        <li>Starter Lua templates</li>
-        <li>Community support</li>
-      </ul>
-      <a href="#" class="plan-btn">Get started free</a>
-    </div>
-
-    <div class="pricing-card featured fade-in">
-      <div class="pricing-badge">Most Popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-price"><sup>$</sup>29</div>
-      <div class="plan-period">/month · cancel anytime</div>
-      <ul class="plan-features">
-        <li>10 game generations/month</li>
-        <li>Full trend analytics</li>
-        <li>Complete Lua code output</li>
-        <li>Monetization blueprint</li>
-        <li>Competitor analysis</li>
-        <li>Priority support</li>
-      </ul>
-      <a href="#" class="plan-btn featured-btn">Start Pro →</a>
-    </div>
-
-    <div class="pricing-card fade-in">
-      <div class="plan-name">Studio</div>
-      <div class="plan-price"><sup>$</sup>79</div>
-      <div class="plan-period">/month · cancel anytime</div>
-      <ul class="plan-features">
-        <li>Unlimited generations</li>
-        <li>Advanced trend API access</li>
-        <li>Multi-game management</li>
-        <li>Revenue forecasting</li>
-        <li>Fortnite UEFN (coming soon)</li>
-        <li>Dedicated support</li>
-      </ul>
-      <a href="#" class="plan-btn">Go Studio</a>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section style="padding:80px 24px;background:var(--surface2);">
-  <div style="max-width:1000px;margin:0 auto;text-align:center;">
-    <div class="section-label">Testimonials</div>
-    <h2 class="section-title" style="margin-bottom:48px;">Developers love DevRift</h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:left;">
-        <div style="margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;">"I generated my first Tycoon game in 20 minutes. The Lua code worked straight away in Roblox Studio. Already at 50k visits in 2 weeks."</p>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <img src="https://api.dicebear.com/7.x/shapes/svg?seed=anyl&backgroundColor=3B82F6" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark);">anyl</div><div style="font-size:12px;color:var(--gray);">Roblox Developer · Pro Plan</div></div>
+    <!-- RESULT HEADER -->
+    <div class="result-header">
+      <div class="result-header-grid"></div>
+      <div class="result-header-left">
+        <div class="result-badge"><div class="badge-pulse"></div> Generated successfully</div>
+        <div class="result-title" id="resultTitle">🚀 Game — Generated</div>
+        <div class="result-meta" id="resultMeta">
+          <div class="meta-chip">🎮 Game</div>
+          <div class="meta-chip">·</div>
+          <div class="meta-chip">⏱ Just generated</div>
         </div>
       </div>
-      <div style="background:var(--surface);border:1.5px solid var(--blue);border-radius:16px;padding:24px;text-align:left;box-shadow:0 4px 20px rgba(37,99,235,0.1);">
-        <div style="margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;">"DevRift understood exactly what makes horror games pop on Roblox right now. Generated a full script with jump scares, atmosphere and game passes in one shot."</p>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <img src="https://api.dicebear.com/7.x/shapes/svg?seed=eciriix&backgroundColor=0F172A" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark);">eciriix</div><div style="font-size:12px;color:var(--gray);">Horror Game Developer · Pro Plan</div></div>
-        </div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:left;">
-        <div style="margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;">"The trend dashboard alone is worth the $29. I stopped wasting time on saturated genres and my last game hit the front page in 3 days."</p>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <img src="https://api.dicebear.com/7.x/shapes/svg?seed=Seishin&backgroundColor=8B5CF6" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark);">Seishin</div><div style="font-size:12px;color:var(--gray);">Studio Owner · Pro Plan</div></div>
+      <div class="result-header-right">
+        <div class="script-count-badge">
+          <div class="script-count-num" id="scriptCountNum">—</div>
+          <div class="script-count-label">SCRIPTS</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <h2>Ready to build your first hit game?</h2>
-  <p>Join thousands of Roblox developers using AI to build smarter and faster.</p>
-  <a href="#" class="btn-white">Start building for free →</a>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="logo">Dev<span>Rift</span></div>
-  <p>© 2026 DevRift. All rights reserved.</p>
-  <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.25);margin-bottom:14px;">Dev by agx</div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:16px;">
-      <a href="https://twitter.com/mczfvlr" target="_blank" style="display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,0.5);text-decoration:none;font-size:13px;font-weight:600;padding:8px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;transition:all 0.2s;" onmouseover="this.style.color='white';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='rgba(255,255,255,0.5)';this.style.borderColor='rgba(255,255,255,0.1)'">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        @mczfvlr
-      </a>
-      <div style="display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,0.5);font-size:13px;font-weight:600;padding:8px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.081.114 18.1.12 18.12a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-        agx.uhq
+    <!-- HOW-TO BANNER -->
+    <div class="howto-banner">
+      <div class="howto-icon">🧩</div>
+      <div>
+        <div class="howto-title">How to use this code in Roblox Studio</div>
+        <div class="howto-desc">
+          Each section below is a <strong>separate script</strong> that goes in a specific location in Roblox Studio.
+          Click the <strong>service name</strong> (e.g. ServerScriptService) to see where to paste it.
+          Use the <strong>Copy</strong> button on each section to copy just that script.
+        </div>
       </div>
     </div>
+
+    <!-- REGEN BAR -->
+    <div class="regen-bar">
+      <div>
+        <div class="regen-text">🤖 Want to tweak this generation?</div>
+        <div class="regen-sub">Ask DevRift AI to modify the code, add features, or change the theme</div>
+      </div>
+      <button class="regen-btn" onclick="togglePrompt()">✏️ Modify</button>
+    </div>
+
+    <div class="prompt-area" id="promptArea" style="display:none;">
+      <div class="prompt-label">Ask DevRift AI</div>
+      <textarea class="prompt-input" id="promptInput" placeholder="e.g. Add a VIP game pass for 200 Robux that gives 3x money boost..."></textarea>
+      <div class="prompt-footer">
+        <span class="prompt-hint">💡 Be specific for better results</span>
+        <button class="prompt-submit" onclick="regenerate()">✨ Regenerate →</button>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="result-tabs">
+      <button class="result-tab active" onclick="switchTab('code', this)">💻 Lua Code</button>
+      <button class="result-tab" onclick="switchTab('monetization', this)">💰 Monetization Plan</button>
+      <button class="result-tab" onclick="switchTab('launch', this)">🚀 Launch Strategy</button>
+    </div>
+
+    <!-- CODE PANEL -->
+    <div class="result-panel active" id="panel-code">
+      <div id="sectionsContainer">
+        <!-- Sections are injected by JS -->
+      </div>
+      <div class="streaming-bar" id="streamingBar">
+        <div class="stream-dots"><span></span><span></span><span></span></div>
+        <span>DevRift AI is generating your code...</span>
+      </div>
+    </div>
+
+    <!-- MONETIZATION PANEL -->
+    <div class="result-panel" id="panel-monetization">
+      <div class="mono-grid">
+        <div class="mono-card">
+          <div class="mono-card-icon">💰</div>
+          <div class="mono-card-title">Estimated Monthly Revenue</div>
+          <div class="mono-card-desc">Based on similar games with your configuration and current player trends</div>
+          <div class="mono-card-value">$1,200 – $4,000</div>
+          <div class="mono-card-sub">After Roblox's 30% cut</div>
+        </div>
+        <div class="mono-card">
+          <div class="mono-card-icon">👥</div>
+          <div class="mono-card-title">Target Player Base</div>
+          <div class="mono-card-desc">Estimated concurrent players needed to hit revenue targets</div>
+          <div class="mono-card-value">800 – 2,400</div>
+          <div class="mono-card-sub">Concurrent players / day</div>
+        </div>
+        <div class="mono-card">
+          <div class="mono-card-icon">🎫</div>
+          <div class="mono-card-title">Game Passes Included</div>
+          <div class="mono-card-desc">Pre-configured in your Lua code with recommended pricing</div>
+          <div class="mono-card-value">4 passes</div>
+          <div class="mono-card-sub">Ready to activate in Roblox Studio</div>
+        </div>
+        <div class="mono-card">
+          <div class="mono-card-icon">📈</div>
+          <div class="mono-card-title">Break-even Timeline</div>
+          <div class="mono-card-desc">Time to recoup DevRift Pro subscription based on projected revenue</div>
+          <div class="mono-card-value">~3 days</div>
+          <div class="mono-card-sub">At minimum revenue estimate</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+        <div style="padding:16px 20px;background:var(--bg);border-bottom:1px solid var(--border);">
+          <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--dark);">🎫 Recommended Game Passes</div>
+        </div>
+        <div style="padding:16px 20px;">
+          <div class="passes-list">
+            <div class="pass-item"><div class="pass-info"><div class="pass-name">🚀 VIP Pass</div><div class="pass-desc">3x money multiplier + exclusive items + golden name tag</div></div><div><div class="pass-price">299 R$</div><div class="pass-conv">~3.5% conversion</div></div></div>
+            <div class="pass-item"><div class="pass-info"><div class="pass-name">⚡ Auto-Collect</div><div class="pass-desc">Automatically collects money while away</div></div><div><div class="pass-price">149 R$</div><div class="pass-conv">~8.2% conversion</div></div></div>
+            <div class="pass-item"><div class="pass-info"><div class="pass-name">🌌 Mega Bundle</div><div class="pass-desc">All passes + exclusive area + 5x starting cash</div></div><div><div class="pass-price">599 R$</div><div class="pass-conv">~1.8% conversion</div></div></div>
+            <div class="pass-item"><div class="pass-info"><div class="pass-name">🎮 2x XP Boost</div><div class="pass-desc">Double XP gains permanently</div></div><div><div class="pass-price">99 R$</div><div class="pass-conv">~11% conversion</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAUNCH PANEL -->
+    <div class="result-panel" id="panel-launch">
+      <div class="launch-timeline">
+        <div class="timeline-item">
+          <div class="timeline-left"><div class="t-dot">📦</div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <div class="t-week">Week 1</div>
+            <div class="t-title">Set up in Roblox Studio</div>
+            <div class="t-desc">Paste each script section into the correct Roblox Studio service as indicated above.</div>
+            <div class="t-tasks">
+              <div class="t-task">Copy each script into its matching service</div>
+              <div class="t-task">Create Game Passes with recommended prices</div>
+              <div class="t-task">Set game to public and test with friends</div>
+              <div class="t-task">Configure thumbnail and game icon</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left"><div class="t-dot">📣</div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <div class="t-week">Week 2</div>
+            <div class="t-title">Launch & initial promotion</div>
+            <div class="t-desc">Get your first 100 players through organic channels and Roblox SEO.</div>
+            <div class="t-tasks">
+              <div class="t-task">Post on Roblox DevForum with your game link</div>
+              <div class="t-task">Share on r/roblox and Roblox Discord servers</div>
+              <div class="t-task">Enable Roblox Sponsored Ads ($5–10 budget)</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left"><div class="t-dot">📊</div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <div class="t-week">Week 3–4</div>
+            <div class="t-title">Optimize based on data</div>
+            <div class="t-desc">Use Roblox Analytics to identify drop-off points and optimize game pass conversion.</div>
+            <div class="t-tasks">
+              <div class="t-task">Check average session length (target: 15+ min)</div>
+              <div class="t-task">A/B test game pass pricing (±20%)</div>
+              <div class="t-task">Add a daily reward system to boost retention</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left"><div class="t-dot">💰</div><div class="t-line"></div></div>
+          <div class="timeline-content">
+            <div class="t-week">Month 2+</div>
+            <div class="t-title">Scale to $1k+/month</div>
+            <div class="t-desc">Once the game is stable, scale up promotion to hit revenue targets.</div>
+            <div class="t-tasks">
+              <div class="t-task">Contact Roblox YouTubers for paid reviews</div>
+              <div class="t-task">Add seasonal events for viral spikes</div>
+              <div class="t-task">Generate a second game with DevRift to cross-promote</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left"><div class="t-dot">🏆</div></div>
+          <div class="timeline-content">
+            <div class="t-week">Month 3–6</div>
+            <div class="t-title">Hit top 1,000 games</div>
+            <div class="t-desc">Build a community and release regular updates.</div>
+            <div class="t-tasks">
+              <div class="t-task">Build a Discord server for your game community</div>
+              <div class="t-task">Release major updates every 2–3 weeks</div>
+              <div class="t-task">Apply for Roblox's UGC program for extra revenue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-</footer>
+</div>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-card">
+    <div class="loading-spinner"></div>
+    <div class="loading-title">Updating your game...</div>
+    <div class="loading-sub">DevRift AI is applying your changes</div>
+    <div class="loading-steps">
+      <div class="lstep active" id="ls1"><div class="lstep-dot"></div> Analyzing your request...</div>
+      <div class="lstep" id="ls2"><div class="lstep-dot"></div> Modifying Lua code...</div>
+      <div class="lstep" id="ls3"><div class="lstep-dot"></div> Optimizing for performance...</div>
+      <div class="lstep" id="ls4"><div class="lstep-dot"></div> Finalizing output...</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-  // Dark mode toggle
+  // ── SERVICE CONFIG ──
+  const SERVICE_META = {
+    'ServerScriptService': { icon: '🖥️', cls: 'server', color: '#A855F7', instruction: 'In Roblox Studio: open the Explorer panel → find ServerScriptService → right-click → Insert Object → Script → paste this code' },
+    'StarterPlayerScripts': { icon: '🎮', cls: 'client', color: '#22C55E', instruction: 'In Roblox Studio: Explorer → StarterPlayer → StarterPlayerScripts → right-click → Insert Object → LocalScript → paste this code' },
+    'StarterGui': { icon: '🖼️', cls: 'gui', color: '#EC4899', instruction: 'In Roblox Studio: Explorer → StarterGui → right-click → Insert Object → LocalScript → paste this code' },
+    'ReplicatedStorage': { icon: '🔄', cls: 'replicated', color: '#3B82F6', instruction: 'In Roblox Studio: Explorer → ReplicatedStorage → right-click → Insert Object → ModuleScript → paste this code' },
+    'ServerStorage': { icon: '📦', cls: 'storage', color: '#F97316', instruction: 'In Roblox Studio: Explorer → ServerStorage → right-click → Insert Object → ModuleScript → paste this code' },
+  };
+
+  // Fallback for unknown services
+  function getServiceMeta(name) {
+    return SERVICE_META[name] || { icon: '📄', cls: 'server', color: '#94A3B8', instruction: 'Place this script in ' + name + ' in Roblox Studio' };
+  }
+
+  // ── PARSE CODE INTO SECTIONS ──
+  function parseCodeSections(code) {
+    const regex = /^-- \[(\w+)\]\s*(.*)$/gm;
+    const sections = [];
+    let lastIndex = 0;
+    let match;
+    const matches = [];
+
+    // Collect all marker positions
+    while ((match = regex.exec(code)) !== null) {
+      matches.push({ service: match[1], scriptName: match[2].trim() || 'Script', index: match.index, fullMatch: match[0] });
+    }
+
+    if (matches.length === 0) {
+      // No markers found — treat entire code as ServerScriptService
+      return [{ service: 'ServerScriptService', scriptName: 'MainScript', code: code.trim() }];
+    }
+
+    for (let i = 0; i < matches.length; i++) {
+      const start = matches[i].index + matches[i].fullMatch.length;
+      const end = i + 1 < matches.length ? matches[i + 1].index : code.length;
+      const sectionCode = code.substring(start, end).trim();
+      if (sectionCode) {
+        sections.push({ service: matches[i].service, scriptName: matches[i].scriptName, code: sectionCode });
+      }
+    }
+
+    return sections;
+  }
+
+  // ── SYNTAX HIGHLIGHTING ──
+  function highlightLua(text) {
+    return text
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/(--[^\n]*)/g, '<span class="c-comment">$1</span>')
+      .replace(/\b(local|function|end|if|then|else|elseif|while|do|for|in|return|and|or|not|true|false|nil|repeat|until|break)\b/g, '<span class="c-kw">$1</span>')
+      .replace(/"([^"]*)"/g, '<span class="c-str">"$1"</span>')
+      .replace(/'([^']*)'/g, '<span class="c-str">\'$1\'</span>')
+      .replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>');
+  }
+
+  // ── RENDER SECTIONS ──
+  function renderSections(sections) {
+    const container = document.getElementById('sectionsContainer');
+    container.innerHTML = '';
+
+    document.getElementById('scriptCountNum').textContent = sections.length;
+
+    sections.forEach((section, idx) => {
+      const meta = getServiceMeta(section.service);
+      const lines = section.code.split('\n');
+      const card = document.createElement('div');
+      card.className = 'section-card';
+      card.style.animationDelay = (0.1 + idx * 0.08) + 's';
+
+      card.innerHTML = `
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="service-icon ${meta.cls}">${meta.icon}</div>
+            <div>
+              <div class="section-service-name">${section.service}</div>
+              <div class="section-script-name">${section.scriptName}.lua</div>
+            </div>
+          </div>
+          <div class="section-header-right">
+            <div class="section-line-count">${lines.length} lines</div>
+            <button class="section-copy-btn" onclick="copySection(this, ${idx})">📋 Copy</button>
+          </div>
+        </div>
+        <div class="section-instruction">
+          📍 <strong>Where to paste:</strong>&nbsp; ${meta.instruction}
+        </div>
+        <div class="code-scroll">
+          <pre id="code-section-${idx}"></pre>
+        </div>
+      `;
+      container.appendChild(card);
+
+      // Stream lines into this section
+      streamSection(idx, lines);
+    });
+  }
+
+  // ── STREAM LINES INTO A SECTION ──
+  function streamSection(idx, lines) {
+    const pre = document.getElementById('code-section-' + idx);
+    let li = 0;
+    function addLine() {
+      if (li >= lines.length) return;
+      const num = li + 1;
+      const html = highlightLua(lines[li]);
+      const div = document.createElement('div');
+      div.className = 'line';
+      div.innerHTML = `<span class="line-num">${String(num).padStart(3, ' ')}</span><span>${html}</span>`;
+      pre.appendChild(div);
+      li++;
+      setTimeout(addLine, 16);
+    }
+    addLine();
+  }
+
+  // ── COPY SECTION ──
+  window._sections = [];
+  function copySection(btn, idx) {
+    const code = window._sections[idx].code;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = '✅ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '📋 Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  // ── COPY ALL ──
+  function copyAll() {
+    const allCode = window._sections.map(s => `-- [${s.service}] ${s.scriptName}\n${s.code}`).join('\n\n');
+    navigator.clipboard.writeText(allCode).then(() => {
+      showToast('✅ All scripts copied to clipboard!');
+    });
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // ── THEME ──
   const toggle = document.getElementById('themeToggle');
   const html = document.documentElement;
-
-  // Check saved preference
   const saved = localStorage.getItem('devrift-theme');
   if (saved) html.setAttribute('data-theme', saved);
-
   toggle.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('devrift-theme', next);
   });
 
-  // Scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
+  // ── TABS ──
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.result-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.result-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+  }
+
+  // ── PROMPT ──
+  function togglePrompt() {
+    const area = document.getElementById('promptArea');
+    area.style.display = area.style.display === 'none' ? 'block' : 'none';
+    if (area.style.display === 'block') document.getElementById('promptInput').focus();
+  }
+
+  // ── REGENERATE ──
+  function regenerate() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.classList.add('show');
+    const steps = ['ls1','ls2','ls3','ls4'];
+    let i = 0;
+    const iv = setInterval(() => {
+      if (i > 0) { document.getElementById(steps[i-1]).classList.remove('active'); document.getElementById(steps[i-1]).classList.add('done'); document.getElementById(steps[i-1]).innerHTML = '✅ ' + document.getElementById(steps[i-1]).textContent.trim(); }
+      if (i < steps.length) { document.getElementById(steps[i]).classList.add('active'); i++; }
+      else {
+        clearInterval(iv);
         setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 80);
-        observer.unobserve(entry.target);
+          overlay.classList.remove('show');
+          document.getElementById('promptArea').style.display = 'none';
+          document.getElementById('promptInput').value = '';
+          steps.forEach(s => { const el = document.getElementById(s); el.classList.remove('active','done'); });
+          // Re-render with existing data
+          const sections = window._sections;
+          if (sections.length) renderSections(sections);
+        }, 600);
       }
-    });
-  }, { threshold: 0.1 });
+    }, 900);
+  }
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  // ── DEMO FALLBACK CODE ──
+  const DEMO_CODE = `-- [ServerScriptService] MainGameScript
+-- ═══════════════════════════════════════════════
+--   SPACE TYCOON v3 — Generated by DevRift AI
+-- ═══════════════════════════════════════════════
 
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local MarketplaceService = game:GetService("MarketplaceService")
+
+-- Game Pass IDs (replace with your own)
+local GAME_PASSES = {
+  VIP        = 123456789,   -- 299 R$ | 3x multiplier
+  AutoCollect = 987654321,  -- 149 R$ | idle earnings
+  Galaxy     = 111222333,   -- 599 R$ | bundle
+  XPBoost    = 444555666    -- 99 R$  | 2x XP
+}
+
+local CONFIG = {
+  startCash     = 100,
+  cashPerSecond = 5,
+  vipMultiplier = 3,
+  xpPerAction   = 10,
+  maxLevel      = 50
+}
+
+-- Setup player data
+local function setupLeaderstats(player)
+  local stats = Instance.new("Folder")
+  stats.Name = "leaderstats"
+  stats.Parent = player
+
+  local cash = Instance.new("IntValue")
+  cash.Name = "Cash"
+  cash.Value = CONFIG.startCash
+  cash.Parent = stats
+
+  local level = Instance.new("IntValue")
+  level.Name = "Level"
+  level.Value = 1
+  level.Parent = stats
+end
+
+-- Check owned passes
+local function hasPass(player, passId)
+  local ok, owns = pcall(function()
+    return MarketplaceService:UserOwnsGamePassAsync(player.UserId, passId)
+  end)
+  return ok and owns
+end
+
+-- Multiplier calculation
+local function getMultiplier(player)
+  local mult = 1
+  if hasPass(player, GAME_PASSES.VIP) then
+    mult = mult * CONFIG.vipMultiplier
+  end
+  if hasPass(player, GAME_PASSES.Galaxy) then
+    mult = mult * 5
+  end
+  return mult
+end
+
+-- Auto-collect loop
+local function startAutoCollect(player)
+  task.spawn(function()
+    while player.Parent do
+      local mult = getMultiplier(player)
+      local earned = CONFIG.cashPerSecond * mult
+      player.leaderstats.Cash.Value += earned
+      task.wait(1)
+    end
+  end)
+end
+
+-- On player join
+local function onPlayerJoin(player)
+  setupLeaderstats(player)
+  if hasPass(player, GAME_PASSES.AutoCollect) then
+    startAutoCollect(player)
+  end
+  print("Player " .. player.Name .. " joined Space Tycoon v3")
+end
+
+Players.PlayerAdded:Connect(onPlayerJoin)
+for _, p in ipairs(Players:GetPlayers()) do
+  onPlayerJoin(p)
+end
+
+print("Space Tycoon v3 loaded — DevRift AI")
+
+-- [StarterPlayerScripts] ClientUI
+-- ═══════════════════════════════════════════════
+--   CLIENT-SIDE UI & CONTROLS
+-- ═══════════════════════════════════════════════
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create main UI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TycoonUI"
+screenGui.Parent = playerGui
+
+-- Cash display
+local cashFrame = Instance.new("Frame")
+cashFrame.Size = UDim2.new(0, 220, 0, 60)
+cashFrame.Position = UDim2.new(0, 20, 0, 20)
+cashFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 35)
+cashFrame.BackgroundTransparency = 0.15
+cashFrame.Parent = screenGui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = cashFrame
+
+local cashLabel = Instance.new("TextLabel")
+cashLabel.Size = UDim2.new(1, -20, 1, 0)
+cashLabel.Position = UDim2.new(0, 10, 0, 0)
+cashLabel.BackgroundTransparency = 1
+cashLabel.TextColor3 = Color3.fromRGB(76, 222, 128)
+cashLabel.Font = Enum.Font.GothamBold
+cashLabel.TextSize = 22
+cashLabel.TextXAlignment = Enum.TextXAlignment.Left
+cashLabel.Text = "Cash: $0"
+cashLabel.Parent = cashFrame
+
+-- Update cash display
+local function updateCash()
+  local stats = player:WaitForChild("leaderstats")
+  local cash = stats:WaitForChild("Cash")
+  cashLabel.Text = "Cash: $" .. tostring(cash.Value)
+  cash.Changed:Connect(function(val)
+    cashLabel.Text = "Cash: $" .. tostring(val)
+  end)
+end
+
+updateCash()
+print("Client UI loaded for " .. player.Name)
+
+-- [ReplicatedStorage] GameConfig
+-- ═══════════════════════════════════════════════
+--   SHARED CONFIG MODULE
+-- ═══════════════════════════════════════════════
+
+local GameConfig = {}
+
+GameConfig.VERSION = "3.0"
+GameConfig.GAME_NAME = "Space Tycoon"
+
+GameConfig.PRICES = {
+  VIP = 299,
+  AutoCollect = 149,
+  Galaxy = 599,
+  XPBoost = 99
+}
+
+GameConfig.TYCOON = {
+  baseIncome = 5,
+  upgradeMultiplier = 1.5,
+  maxTier = 10
+}
+
+return GameConfig`;
+
+  // ── INIT ──
+  window.addEventListener('load', () => {
+    const realCode = localStorage.getItem('generatedCode');
+    const genre = localStorage.getItem('generatedGenre') || '';
+    const theme = localStorage.getItem('generatedTheme') || '';
+
+    // Update header
+    const title = theme && genre ? `🚀 ${theme} ${genre} — Generated` : '🚀 Game — Generated';
+    document.getElementById('resultTitle').textContent = title;
+    document.getElementById('breadcrumbTitle').textContent = theme && genre ? `${theme} ${genre}` : 'Generated Game';
+
+    if (theme || genre) {
+      document.getElementById('resultMeta').innerHTML = `
+        <div class="meta-chip">${genre ? '🏭 ' + genre : ''}</div>
+        ${genre && theme ? '<div class="meta-chip">·</div>' : ''}
+        <div class="meta-chip">${theme ? '🎨 ' + theme : ''}</div>
+        <div class="meta-chip">·</div>
+        <div class="meta-chip">⏱ Just generated</div>
+      `;
+    }
+
+    const code = realCode || DEMO_CODE;
+    const sections = parseCodeSections(code);
+    window._sections = sections;
+
+    document.title = `DevRift — ${theme || 'Game'} ${genre || ''} Generated`;
+
+    setTimeout(() => renderSections(sections), 400);
   });
 </script>
 </body>
